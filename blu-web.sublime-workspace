@@ -1,0 +1,316 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 206.0,
+		"selected_items":
+		[
+			[
+				"save",
+				"Project: Save As"
+			],
+			[
+				"bea",
+				"Javascript Beautify"
+			],
+			[
+				"beat",
+				"Javascript Beautify"
+			],
+			[
+				"insat",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pac ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 601.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2deb499853c4371624f5a07e27c334aa' + 'bf8c4e67d14fb0525ba4f89698a6d7e1'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/octoblu/Projects/Octoblu/blu-web"
+	],
+	"file_history":
+	[
+		"/Users/octoblu/Projects/Octoblu/octoblu/scripts/add_missing_url_params.coffee",
+		"/Users/octoblu/Projects/Octoblu/octoblu/config/auth.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/pages/admin/groups/all.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/app/controllers/invitation.js",
+		"/Users/octoblu/Library/Application Support/Sublime Text 3/Packages/User/JavascriptBeautify.sublime-settings",
+		"/Users/octoblu/Library/Application Support/Sublime Text 3/Packages/Javascript Beautify/JavascriptBeautify.sublime-settings",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/selenium-webdriver/docs/class_goog_iter_GroupByIterator_.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/setup/groupUpdate.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/app/controllers/group.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/npm/lib/utils/gently-rm.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/gulpfile.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/pages/admin/index.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/casperjs/node_modules/phantomjs/node_modules/adm-zip/headers/mainHeader.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/angular/controllers/admin-controller.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/pages/api_detail.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/lib/elastic.js/tests/admin_test.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/design/Admin Page Invitation.md",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/lib/ace-builds/src-min-noconflict/snippets/soy_template.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/assets/less/admin.less",
+		"/Users/octoblu/Projects/Octoblu/octoblu/templates/invitation.jade",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/angular/controllers/invitation-accept-controller.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/webdriverjs/lib/commands/getLocationInView.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/lodash-node/compat/internals/isNative.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/config/instagram.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/lib/angular-material/modules/js/dialog/dialog.min.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/lib/angular-material/modules/js/dialog/dialog.min.css",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/assets/design/d3.v3.min.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.min.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/assets/json/nodetypes/device/mindwave.json",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/mongojs/node_modules/mongodb/lib/mongodb/admin.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/test/angular/controllers/admin-controller-spec.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/angular/controllers/admin-detail.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/angular/controllers/admin.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/design/mockups/admin-page.ep",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/.bin/cake",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/npm/scripts/clean-old.sh",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/npm/configure",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/bower/CONTRIBUTING.md",
+		"/Users/octoblu/Projects/Octoblu/octoblu/app/controllers/auth-controller.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/angular/controllers/add-channel-meshblu.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/pages/general-search-item.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/config/github.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/npm/test/tap/unpack-foreign-tarball/gitignore.tgz",
+		"/Users/octoblu/Projects/Octoblu/octoblu/package.json",
+		"/Users/octoblu/Projects/Octoblu/octoblu/assets/json/channels/zendesk.json",
+		"/Users/octoblu/Projects/Octoblu/octoblu/test/controllers/flow-controller-spec.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/webdriverjs/lib/protocol/elementIdName.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/lib/modernizr/feature-detects/pointerlock-api.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/assets/less/omnibox.less",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/lodash-node/compat/internals/objectPool.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/assets/less/lib/bootstrap/mixins/opacity.less",
+		"/Users/octoblu/Projects/Octoblu/octoblu/app/controllers/zendesk-controller.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/config/zendesk.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/casperjs/node_modules/phantomjs/node_modules/adm-zip/zipEntry.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/pages/node_forms/pluck_form.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/pages/node_forms/change_form.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/debug/node.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/assets/json/nodetypes.json",
+		"/Users/octoblu/Projects/Octoblu/octoblu/config/withings.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/selenium-webdriver/docs/class_webdriver_UnhandledAlertError.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/selenium-webdriver/lib/test/data/underscore.html",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/karma-osx-reporter/node_modules/.bin/node-osx-notifier",
+		"/Users/octoblu/Projects/Octoblu/octoblu/newrelic.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/bcrypt/CHANGELOG.md",
+		"/Users/octoblu/Projects/Octoblu/octoblu/app/controllers/channel.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/bower/node_modules/cardinal/test/cardinal-highlight-file-async.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/browserify/node_modules/crypto-browserify/create-hash.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/.bin/casperjs",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/assets/images/designer/pluck.svg",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/lodash-node/underscore/collections/pluck.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/lodash-node/modern/collections/pluck.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/node_modules/lodash-node/compat/collections/pluck.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/app/controllers/plugin.js",
+		"/Users/octoblu/Projects/Octoblu/octoblu/public/static/pebble-login.html",
+		"/Users/octoblu/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/octoblu/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 56.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"get",
+			"subdomain\": \"octoblu",
+			"chanel",
+			"gotowe"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 56.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "blu-web.sublime-project",
+	"replace":
+	{
+		"height": 108.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"auth",
+				"config/auth.js"
+			],
+			[
+				"groupthml",
+				"public/pages/admin/groups/all.html"
+			],
+			[
+				"adminhtml",
+				"public/pages/admin/index.html"
+			],
+			[
+				"admincontr",
+				"public/angular/controllers/admin-controller.js"
+			],
+			[
+				"inviation",
+				"app/controllers/invitation.js"
+			],
+			[
+				"packa",
+				"package.json"
+			],
+			[
+				"zen",
+				"assets/json/channels/zendesk.json"
+			],
+			[
+				"zend",
+				"assets/json/channels/zendesk.json"
+			],
+			[
+				"nod",
+				"assets/json/nodetypes.json"
+			],
+			[
+				"node",
+				"node_modules/debug/node.js"
+			],
+			[
+				"change_form",
+				"public/pages/node_forms/change_form.html"
+			],
+			[
+				"pluck",
+				"public/pages/node_forms/pluck_form.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Projects/Sublime/FlowRunner.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
