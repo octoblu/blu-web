@@ -1,1 +1,7 @@
 lib/bower
+node_modules
+dist
+npm-*.log
+coverage
+meshblu.json
+*.sublime-workspace
