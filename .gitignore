@@ -1,4 +1,4 @@
-lib/bower
+lib
 node_modules
 dist
 npm-*.log

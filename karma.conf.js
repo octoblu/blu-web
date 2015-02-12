@@ -12,17 +12,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        "../tests/assets/meshblu.bundle.js",
-        "../dist/dependencies.js",
-        "../lib/bower/angular-mocks/angular-mocks.js",
+        "dist/dependencies.js",
+        "lib/bower/angular-mocks/angular-mocks.js",
         "**/*.html",
-        "../tests/test_helper.js",
+        "../test/angular/test_helper.js",
 
         "**/*.js",
-        "services/**/*.js",
 
-        "../tests/**/*-spec.js",
-        "../tests/**/*-spec.coffee",
+        "../test/**/*-spec.js",
+        "../test/**/*-spec.coffee",
         "**/*.coffee"
     ],
 
@@ -35,7 +33,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       '**/*.html': 'ng-html2js',
-      '../tests/**/*.coffee':  ['coffee'],
+      '../test/**/*.coffee':  ['coffee'],
       '**/*.coffee':  ['coffee']
     },
 
