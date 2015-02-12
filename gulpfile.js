@@ -12,7 +12,7 @@ var gulp         = require('gulp'),
   _              = require('lodash');
 
 gulp.task('bower', function() {
-  bower('./lib');
+  bower('./app/lib');
 });
 
 gulp.task('bower:concat', ['bower'], function(){
@@ -54,9 +54,9 @@ gulp.task('watch', ['default'], function() {
   gulp.watch(['./app/**/*.coffee', './app/*.coffee'], ['coffee:compile']);
 
   nodemon({
-    script : 'index.js',
+    script : 'server.js',
     ext : 'js json coffee',
-    watch : ['index.js', 'app/*'],
+    watch : ['server.js', 'app/*'],
     env: { 'NODE_ENV': 'development' }
   });
 });
