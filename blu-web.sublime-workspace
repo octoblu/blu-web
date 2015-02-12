@@ -15,7 +15,23 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 2183,
+				"buffer_size": 2186,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/index.html",
+			"settings":
+			{
+				"buffer_size": 553,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/angular/home/index.html",
+			"settings":
+			{
+				"buffer_size": 350,
 				"line_ending": "Unix"
 			}
 		},
@@ -28,6 +44,14 @@
 			}
 		},
 		{
+			"file": "public/angular/app.js",
+			"settings":
+			{
+				"buffer_size": 403,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "package.json",
 			"settings":
 			{
@@ -36,18 +60,10 @@
 			}
 		},
 		{
-			"file": "app/index.html",
-			"settings":
-			{
-				"buffer_size": 539,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "gulpfile.js",
 			"settings":
 			{
-				"buffer_size": 1886,
+				"buffer_size": 2012,
 				"line_ending": "Unix"
 			}
 		},
@@ -55,39 +71,7 @@
 			"file": ".bowerrc",
 			"settings":
 			{
-				"buffer_size": 26,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/home/index.html",
-			"settings":
-			{
-				"buffer_size": 173,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/app.js",
-			"settings":
-			{
-				"buffer_size": 392,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/dist/application.js",
-			"settings":
-			{
-				"buffer_size": 5459365,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/home/home-controller.js",
-			"settings":
-			{
-				"buffer_size": 250,
+				"buffer_size": 33,
 				"line_ending": "Unix"
 			}
 		}
@@ -164,7 +148,12 @@
 	],
 	"file_history":
 	[
+		"/Users/octoblu/Projects/Octoblu/blu-web/app/home/home-controller.js",
+		"/Users/octoblu/Projects/Octoblu/blu-web/app/app.js",
 		"/Users/octoblu/Projects/Octoblu/blu-web/app/home/index.html",
+		"/Users/octoblu/Projects/Octoblu/blu-web/app/index.html",
+		"/Users/octoblu/Projects/Octoblu/blu-web/public/angular/index.html",
+		"/Users/octoblu/Projects/Octoblu/blu-web/app/dist/application.js",
 		"/Users/octoblu/Projects/Octoblu/blu-web/test/home-controller-spec.coffee",
 		"/Users/octoblu/Projects/Octoblu/blu-web/bin/www",
 		"/Users/octoblu/Projects/Octoblu/blu-web/app.js",
@@ -174,7 +163,6 @@
 		"/Users/octoblu/Projects/Octoblu/blu-web/package.json",
 		"/Users/octoblu/Projects/Octoblu/blu-web/test/angular/test_helper.js",
 		"/Users/octoblu/Projects/Octoblu/blu-web/gulpfile.js",
-		"/Users/octoblu/Projects/Octoblu/blu-web/app/index.html",
 		"/Users/octoblu/Projects/Octoblu/blu-web/karma.conf.js",
 		"/Users/octoblu/Projects/Octoblu/blu-web/test/mocha.opts",
 		"/Users/octoblu/Projects/Octoblu/blu-web/.bowerrc",
@@ -281,6 +269,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"layout-align=\"space-between\" ",
+			"center",
 			"HomeController",
 			"homeController",
 			"cats",
@@ -313,7 +303,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -322,15 +312,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2183,
+						"buffer_size": 2186,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								509,
-								509
+								497,
+								497
 							]
 						],
 						"settings":
@@ -343,82 +333,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 201,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								145,
-								145
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "package.json",
+					"buffer": 1,
+					"file": "public/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2000,
+						"buffer_size": 553,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								188,
-								188
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 539,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								245,
-								245
+								331,
+								331
 							]
 						],
 						"settings":
@@ -433,20 +365,76 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "gulpfile.js",
+					"buffer": 2,
+					"file": "public/angular/home/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1886,
+						"buffer_size": 350,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								560,
-								560
+								45,
+								45
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 201,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								143,
+								143
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/angular/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 403,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								229,
+								229
 							]
 						],
 						"settings":
@@ -456,27 +444,87 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 190.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": ".bowerrc",
+					"file": "package.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 26,
+						"buffer_size": 2000,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18,
-								18
+								186,
+								186
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2012,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								566,
+								566
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 246.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": ".bowerrc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 33,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25,
+								25
 							]
 						],
 						"settings":
@@ -488,122 +536,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/home/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 173,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								167,
-								167
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 392,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								392,
-								392
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "app/dist/application.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5459365,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2328,
-								2328
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3116.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "app/home/home-controller.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 250,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								250,
-								250
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
 					"type": "text"
 				}
 			]
