@@ -1,6 +1,6 @@
-lib
+public/lib
 node_modules
-dist
+public/angular/assets/dist
 npm-*.log
 coverage
 meshblu.json
