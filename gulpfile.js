@@ -31,14 +31,14 @@ gulp.task('coffee:clean', function(){
 })
 
 gulp.task('coffee:compile', ['coffee:clean'], function(){
-  return gulp.src(['./public/angular/**/*.coffee'])
+  return gulp.src(['./public/app/**/*.coffee'])
     .pipe(plumber())
       .pipe(coffee({bare: true}))
-    .pipe(gulp.dest('./public/compiled/'));
+    .pipe(gulp.dest('./public/app/compiled/'));
 });
 
 gulp.task('javascript:concat', ['coffee:compile'], function(){
-  return gulp.src(['./public/angular/app.js', './public/angular/**/*.js'])
+  return gulp.src(['./public/app/app.js', './public/app/**/*.js'])
     .pipe(plumber())
     .pipe(sourcemaps.init())
       .pipe(concat('application.js'))
@@ -50,13 +50,13 @@ gulp.task('default', ['bower:concat', 'javascript:concat'], function() {});
 
 gulp.task('watch', ['default'], function() {
   gulp.watch(['./bower.json'], ['bower']);
-  gulp.watch(['./public/angular/**/*.js', './public/angular/*.js'], ['javascript:concat']);
-  gulp.watch(['./public/angular/**/*.coffee', './public/angular/*.coffee'], ['coffee:compile']);
+  gulp.watch(['./public/app/**/*.js', './public/app/*.js'], ['javascript:concat']);
+  gulp.watch(['./public/app/**/*.coffee', './public/app/*.coffee'], ['coffee:compile']);
 
   nodemon({
     script : 'server.js',
     ext : 'js json coffee',
-    watch : ['server.js', 'public/angular/*'],
+    watch : ['server.js', 'public/app/*'],
     env: { 'NODE_ENV': 'development' }
   });
 });

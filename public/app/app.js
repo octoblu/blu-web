@@ -5,8 +5,11 @@ angular.module('blu', ['ngCookies', 'ngRoute'])
         $routeProvider
             // route for the home page
             .when('/', {
-                templateUrl : '../../angular/home/index.html',
-                controller  : 'HomeController'
+                controller  : 'RegisterController'
+            })
+            .when('/:uuid', {
+              templateUrl : '/home/home.html',
+              controller : 'HomeController'
             })
 			.otherwise( { redirectTo: "/" });
     })
