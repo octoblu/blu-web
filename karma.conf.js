@@ -12,11 +12,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        "lib/angular/angular.js",
         "lib/**/*.js",
-        "angular/**.*.js",
-        "**/*.coffee",
         "../test/angular/test_helper.js",
-        "../test/**/*-spec.js",
+        "app/**/*.js",
+        "app/**/*.coffee",
         "../test/**/*-spec.coffee"
     ],
 
@@ -42,8 +42,6 @@ module.exports = function(config) {
       transformPath: function(path) {
         return path.replace(/\.coffee$/, '.js');
       }
-    },
-    ngHtml2JsPreprocessor: {
     },
 
     // test results reporter to use
