@@ -2,45 +2,41 @@ describe 'HomeController', ->
   beforeEach ->
     module 'blu'
 
-    inject ($controller, $rootScope, $location) ->
-      @rootScope = $rootScope
-      @scope = $rootScope.$new()
-      @fakeLocation = new FakeLocation()
-
+    inject ($controller) ->
+      @authenticatorService = {}
+      @routeParams = {}
       @sut = $controller('HomeController', {
-        $rootScope: @rootScope
-        $scope : @scope
-        $location: @fakeLocation
+        AuthenticatorService: @authenticatorService,
+        $routeParams : @routeParams
       })
 
   beforeEach ->
   it 'should exist', ->
     expect(@sut).to.exist
 
-  it 'should add a login function to the scope', ->
-    expect(@scope.login).to.exist
+  it 'should have a function called login', ->
+    expect(@sut.login).to.exist
 
-  it 'should add a register function to the scope', ->
-    expect(@scope.register).to.exist
-
-  describe 'when login is called', ->
+  describe 'when login is called with a pin', ->
     beforeEach ->
-      @scope.login()
-    it 'should call $location.path', ->
-      expect(@fakeLocation.path).to.have.been.called
-    it 'should call $location.path with the login route', ->
-      expect(@fakeLocation.path).to.have.been.calledWith '/login'
+      @uuidsAndPins = [
+        {
+          uuid : 'U1'
+          pin : '12345'
+        }
+        {
+          uuid: 'U2'
+          pin: '54321'
+        }
+      ]
+      @authenticatorService.authenticate = sinon.stub()
 
-  describe 'when register is called', ->
-    beforeEach ->
-      @scope.register()
-    it 'should call $location.path', ->
-      expect(@fakeLocation.path).to.have.been.called
-    it 'should call $location.path with the register route', ->
-      expect(@fakeLocation.path).to.have.been.calledWith '/register'
+    it 'should call authenticatorService.authenticate with the uuid and pin entered', ->
+      @routeParams.uuid = @uuidsAndPins[0].uuid
+      @sut.login @uuidsAndPins[0].pin
+      expect(@authenticatorService.authenticate).to.have.been.calledWith @uuidsAndPins[0].uuid, @uuidsAndPins[0].pin
 
-
-
-class FakeLocation
-  constructor: ()->
-   @path = sinon.stub()
+    it 'should call authenticatorService.authenticate with the uuid and pin entered', ->
+      @routeParams.uuid = @uuidsAndPins[1].uuid
+      @sut.login @uuidsAndPins[1].pin
+      expect(@authenticatorService.authenticate).to.have.been.calledWith @uuidsAndPins[1].uuid, @uuidsAndPins[1].pin
