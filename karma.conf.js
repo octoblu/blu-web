@@ -4,7 +4,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'app',
+    basePath: 'public',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -12,16 +12,12 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        "dist/dependencies.js",
-        "lib/bower/angular-mocks/angular-mocks.js",
-        "**/*.html",
+        "lib/**/*.js",
+        "angular/**.*.js",
+        "**/*.coffee",
         "../test/angular/test_helper.js",
-
-        "**/*.js",
-
         "../test/**/*-spec.js",
-        "../test/**/*-spec.coffee",
-        "**/*.coffee"
+        "../test/**/*-spec.coffee"
     ],
 
     // list of files to exclude
@@ -32,7 +28,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      '**/*.html': 'ng-html2js',
       '../test/**/*.coffee':  ['coffee'],
       '**/*.coffee':  ['coffee']
     },

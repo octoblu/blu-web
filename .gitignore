@@ -5,3 +5,4 @@ npm-*.log
 coverage
 meshblu.json
 *.sublime-workspace
+public/assets/dist
