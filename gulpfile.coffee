@@ -22,10 +22,6 @@ gulp.task 'bower:concat', ['bower'], ->
       .pipe sourcemaps.write('.')
       .pipe gulp.dest('./public/assets/dist/')
 
-gulp.task 'coffee:clean', ->
-  gulp.src ['./app/compiled'], read: false
-      .pipe clean()
-
 gulp.task 'coffee:compile', ['coffee:clean'], ->
   gulp.src ['./public/app/**/*.coffee']
       .pipe plumber()
