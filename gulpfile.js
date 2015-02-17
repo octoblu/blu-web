@@ -33,16 +33,9 @@ gulp.task('coffee:clean', function(){
 gulp.task('coffee:compile', ['coffee:clean'], function(){
   return gulp.src(['./public/app/**/*.coffee'])
     .pipe(plumber())
-      .pipe(coffee({bare: true}))
-    .pipe(gulp.dest('./public/app/compiled/'));
-});
-
-gulp.task('javascript:concat', ['coffee:compile'], function(){
-  return gulp.src(['./public/app/app.js', './public/app/**/*.js'])
-    .pipe(plumber())
-    .pipe(sourcemaps.init())
+      .pipe(coffee())
       .pipe(concat('application.js'))
-    .pipe(sourcemaps.write('.'))
+      .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./public/assets/dist/'));
 });
 
@@ -56,7 +49,7 @@ gulp.task('webserver', function(){
     }));
 })
 
-gulp.task('default', ['bower:concat', 'javascript:concat'], function() {});
+gulp.task('default', ['bower:concat', 'coffee:compile'], function() {});
 
 gulp.task('watch', ['default', 'webserver'], function() {
   gulp.watch(['./bower.json'], ['bower']);

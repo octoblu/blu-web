@@ -1,5 +1,13 @@
 class HomeController
   constructor: (@AuthenticatorService, @TriggerService, @$routeParams) ->
+    @triggers = [
+      name: 'Tigers'
+    ,
+      name: 'Axed'
+    ,
+      name: 'Tragic Flaw'
+    ]
+    
   login: (pin) =>
     @AuthenticatorService.authenticate @$routeParams.uuid, pin
       .then (token) =>
