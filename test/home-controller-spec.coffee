@@ -107,4 +107,14 @@ describe 'HomeController', ->
         @rootScope.$digest()
         expect(@meshbluService.uuid).to.equal @routeParams.uuid
 
+    describe '->triggerTheTrigger', ->
+      it 'should be a function', ->
+        expect(@sut.triggerTheTrigger).to.be.a 'function'
 
+      describe 'when triggerTheTrigger is called with a trigger', ->
+        beforeEach ->
+          @trigger = type: 'finger', flow: 'Yo', uuid: 'goooeyid'
+
+        it 'should call meshbluService.trigger with the flow id and trigger id', ->
+          @sut.triggerTheTrigger @trigger
+          expect(@meshbluService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid

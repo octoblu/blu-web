@@ -11,4 +11,6 @@ class HomeController
       .catch (error) =>
         @error = error.message
 
+  triggerTheTrigger: =>
+
 angular.module('blu').controller 'HomeController', HomeController
