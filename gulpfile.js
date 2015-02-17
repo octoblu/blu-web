@@ -6,9 +6,9 @@ var gulp         = require('gulp'),
   less           = require('gulp-less'),
   plumber        = require('gulp-plumber'),
   sourcemaps     = require('gulp-sourcemaps'),
-  nodemon        = require('gulp-nodemon'),
   coffee         = require('gulp-coffee'),
   clean          = require('gulp-clean'),
+  webserver      = require('gulp-webserver'),
   _              = require('lodash');
 
 gulp.task('bower', function() {
@@ -46,17 +46,20 @@ gulp.task('javascript:concat', ['coffee:compile'], function(){
     .pipe(gulp.dest('./public/assets/dist/'));
 });
 
+gulp.task('webserver', function(){
+  return gulp.src('./public')
+    .pipe(webserver({
+      port: 8888,
+      livereload: true,
+      directoryListing: false,
+      open: false
+    }));
+})
+
 gulp.task('default', ['bower:concat', 'javascript:concat'], function() {});
 
-gulp.task('watch', ['default'], function() {
+gulp.task('watch', ['default', 'webserver'], function() {
   gulp.watch(['./bower.json'], ['bower']);
   gulp.watch(['./public/app/**/*.js', './public/app/*.js'], ['javascript:concat']);
   gulp.watch(['./public/app/**/*.coffee', './public/app/*.coffee'], ['coffee:compile']);
-
-  nodemon({
-    script : 'server.js',
-    ext : 'js json coffee',
-    watch : ['server.js', 'public/app/*'],
-    env: { 'NODE_ENV': 'development' }
-  });
 });
