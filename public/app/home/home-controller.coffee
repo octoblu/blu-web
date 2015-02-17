@@ -11,6 +11,7 @@ class HomeController
       .catch (error) =>
         @error = error.message
 
-  triggerTheTrigger: =>
+  triggerTheTrigger: (trigger) =>
+    @MeshbluService.trigger trigger.flow, trigger.uuid
 
 angular.module('blu').controller 'HomeController', HomeController

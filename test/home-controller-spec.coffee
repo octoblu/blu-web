@@ -108,6 +108,9 @@ describe 'HomeController', ->
         expect(@meshbluService.uuid).to.equal @routeParams.uuid
 
     describe '->triggerTheTrigger', ->
+      beforeEach ->
+        @meshbluService.trigger = sinon.spy()
+
       it 'should be a function', ->
         expect(@sut.triggerTheTrigger).to.be.a 'function'
 
