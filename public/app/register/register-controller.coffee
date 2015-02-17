@@ -9,6 +9,5 @@ class RegisterController
       @location.path "/#{res.uuid}"
     .catch =>
       @error = "Unable to register a new device. Please try again."
-      console.error @error
 
 angular.module('blu').controller 'RegisterController', RegisterController
