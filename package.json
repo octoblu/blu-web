@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "gulp && http-server -p 8888",
     "test": "node_modules/karma/bin/karma start --single-run"
   },
   "repository": {
@@ -44,6 +44,7 @@
     "gulp-nodemon": "~1.0.4",
     "gulp-plumber": "~0.6.4",
     "gulp-sourcemaps": "~1.1.0",
+    "http-server": "^0.7.4",
     "lodash": "^2.4.1",
     "lodash-node": "~2.4.1",
     "main-bower-files": "^2.0.0",
