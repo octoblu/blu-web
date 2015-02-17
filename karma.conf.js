@@ -4,7 +4,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: 'public',
+    basePath: '',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -12,25 +12,24 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        "lib/angular/angular.js",
-        "lib/angular-mocks/angular-mocks.js",
-        "lib/lodash/lodash.js",
-        "../test/test_helper.coffee",
+        "public/lib/angular/angular.js",
+        "public/lib/angular-mocks/angular-mocks.js",
+        "public/lib/lodash/lodash.js",
+        "test/test_helper.coffee",
         "app/**/*.coffee",
-        "../test/**/*-spec.coffee"
+        "test/**/*-spec.coffee"
     ],
 
     // list of files to exclude
     exclude: [
-      "app/app.coffee",
-      "lib/angular-material/**/*.js"
+      "app/app.coffee"
     ],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      '../test/**/*.coffee':  ['coffee'],
-      '**/*.coffee':  ['coffee']
+      'test/**/*.coffee':  ['coffee'],
+      'app/**/*.coffee':  ['coffee']
     },
 
     coffeePreprocessor: {
