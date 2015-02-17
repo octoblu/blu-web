@@ -1,17 +1,17 @@
 class HomeController
-  constructor: (@AuthenticatorService, @MeshbluService, @$routeParams) ->
+  constructor: (@AuthenticatorService, @TriggerService, @$routeParams) ->
   login: (pin) =>
     @AuthenticatorService.authenticate @$routeParams.uuid, pin
       .then (token) =>
-        @MeshbluService.uuid = @$routeParams.uuid
-        @MeshbluService.token = token
-        @MeshbluService.getTriggers()
+        @TriggerService.uuid = @$routeParams.uuid
+        @TriggerService.token = token
+        @TriggerService.getTriggers()
       .then (triggers) =>
         @triggers = triggers
       .catch (error) =>
         @error = error.message
 
   triggerTheTrigger: (trigger) =>
-    @MeshbluService.trigger trigger.flow, trigger.uuid
+    @TriggerService.trigger trigger.flow, trigger.uuid
 
 angular.module('blu').controller 'HomeController', HomeController

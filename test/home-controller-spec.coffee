@@ -7,10 +7,10 @@ describe 'HomeController', ->
       @rootScope = $rootScope
       @authenticatorService = {}
       @routeParams = {}
-      @meshbluService = {}
+      @triggerService = {}
       @sut = $controller('HomeController', {
         AuthenticatorService: @authenticatorService,
-        MeshbluService : @meshbluService,
+        TriggerService : @triggerService,
         $routeParams : @routeParams
       })
 
@@ -49,31 +49,31 @@ describe 'HomeController', ->
       beforeEach ->
         @token = 'awesomeness'
         @authenticatorService.authenticate.returns @q.when(@token)
-        @meshbluService.getTriggers = sinon.stub().returns @q.when()
+        @triggerService.getTriggers = sinon.stub().returns @q.when()
 
       it 'should set the session token on the meshblu service', ->
         @sut.login @uuidsAndPins[1].pin
         @rootScope.$digest()
-        expect(@meshbluService.token).to.equal @token
+        expect(@triggerService.token).to.equal @token
 
       it 'should set uuid on the meshblu service', ->
         @routeParams.uuid = @uuidsAndPins[1].uuid
         @sut.login @uuidsAndPins[1].pin
         @rootScope.$digest()
-        expect(@meshbluService.uuid).to.equal @routeParams.uuid
+        expect(@triggerService.uuid).to.equal @routeParams.uuid
 
-      it 'should call meshbluService->getTriggers()', ->
+      it 'should call triggerService->getTriggers()', ->
         @sut.login @uuidsAndPins[1].pin
         @rootScope.$digest()
-        expect(@meshbluService.getTriggers).to.have.been.called
+        expect(@triggerService.getTriggers).to.have.been.called
 
-      describe 'when meshbluService.getTriggers returns some triggers', ->
+      describe 'when triggerService.getTriggers returns some triggers', ->
         beforeEach ->
           @triggers = [
             { type: 'rifle' }
             { type: 'hair' }
           ]
-          @meshbluService.getTriggers.returns @q.when(@triggers)
+          @triggerService.getTriggers.returns @q.when(@triggers)
 
         it 'should add those triggers to the scope', ->
           @sut.login @uuidsAndPins[1].pin
@@ -94,22 +94,22 @@ describe 'HomeController', ->
       beforeEach ->
         @token = 'supercool'
         @authenticatorService.authenticate.returns(@q.when(@token))
-        @meshbluService.getTriggers = sinon.stub().returns @q.when()
+        @triggerService.getTriggers = sinon.stub().returns @q.when()
 
       it 'should set the session token on the meshblu service', ->
         @sut.login @uuidsAndPins[1].pin
         @rootScope.$digest()
-        expect(@meshbluService.token).to.equal @token
+        expect(@triggerService.token).to.equal @token
 
       it 'should set uuid on the meshblu service', ->
         @routeParams.uuid = @uuidsAndPins[0].uuid
         @sut.login @uuidsAndPins[0].pin
         @rootScope.$digest()
-        expect(@meshbluService.uuid).to.equal @routeParams.uuid
+        expect(@triggerService.uuid).to.equal @routeParams.uuid
 
     describe '->triggerTheTrigger', ->
       beforeEach ->
-        @meshbluService.trigger = sinon.spy()
+        @triggerService.trigger = sinon.spy()
 
       it 'should be a function', ->
         expect(@sut.triggerTheTrigger).to.be.a 'function'
@@ -118,6 +118,6 @@ describe 'HomeController', ->
         beforeEach ->
           @trigger = type: 'finger', flow: 'Yo', uuid: 'goooeyid'
 
-        it 'should call meshbluService.trigger with the flow id and trigger id', ->
+        it 'should call triggerService.trigger with the flow id and trigger id', ->
           @sut.triggerTheTrigger @trigger
-          expect(@meshbluService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid
+          expect(@triggerService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid

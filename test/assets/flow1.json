@@ -1,0 +1,184 @@
+[
+    {
+      "id" : "c0273190-b2e0-11e4-8832-9de13c7bc92b",
+      "label" : "Podio flow",
+      "type" : "tab",
+      "hash" : "d1b992a4"
+    },
+    {
+      "id" : "c2c7cd10-b2e0-11e4-86a6-570243d611bd",
+      "resourceType" : "flow-node",
+      "payloadType" : "date",
+      "once" : false,
+      "name" : "Trigger",
+      "class" : "trigger",
+      "helpText" : "Send a static message. Can also be triggered from other flows",
+      "category" : "operation",
+      "uuid" : "37f0a74a-2f17-11e4-9617-a6c5e4d22fb7",
+      "type" : "trigger",
+      "defaults" : {
+        "payloadType" : "date",
+        "once" : false
+      },
+      "input" : 0,
+      "output" : 1,
+      "formTemplatePath" : "/pages/node_forms/button_form.html",
+      "logo" : "https://ds78apnml6was.cloudfront.net/operation/trigger.svg",
+      "inputLocations" : [ ],
+      "outputLocations" : [
+        27.5
+      ],
+      "x" : 748,
+      "y" : 425,
+      "needsConfiguration" : false,
+      "needsSetup" : false,
+      "oauth" : {
+
+      },
+      "z" : "c0273190-b2e0-11e4-8832-9de13c7bc92b",
+      "hash" : "d1b992a4",
+      "wires" : [
+        [
+          "0bbd23f0-b2e4-11e4-9643-3d672e3741a4"
+        ]
+      ]
+    },
+    {
+      "id" : "dea68170-b2e0-11e4-b41b-d70027107b78",
+      "resourceType" : "flow-node",
+      "active" : true,
+      "debug" : true,
+      "complete" : false,
+      "name" : "Debug",
+      "class" : "debug",
+      "helpText" : "Display the contents of the messages it receives in the debug panel",
+      "category" : "operation",
+      "uuid" : "37f0b88e-2f17-11e4-9617-a6c5e4d22fb7",
+      "type" : "debug",
+      "defaults" : {
+        "active" : true,
+        "debug" : true,
+        "complete" : false
+      },
+      "color" : "#87a980",
+      "input" : 1,
+      "output" : 0,
+      "align" : "right",
+      "formTemplatePath" : "/pages/node_forms/debug_form.html",
+      "logo" : "https://ds78apnml6was.cloudfront.net/operation/debug.svg",
+      "inputLocations" : [
+        27.5
+      ],
+      "outputLocations" : [ ],
+      "x" : 1020,
+      "y" : 277,
+      "needsConfiguration" : false,
+      "needsSetup" : false,
+      "oauth" : {
+
+      },
+      "z" : "c0273190-b2e0-11e4-8832-9de13c7bc92b",
+      "hash" : "d1b992a4",
+      "wires" : [ ]
+    },
+    {
+      "id" : "0bbd23f0-b2e4-11e4-9643-3d672e3741a4",
+      "resourceType" : "flow-node",
+      "channelid" : "54458c5b5a370c58ca66a147",
+      "channelActivationId" : "54dce9d9f2377aaa0c8317c7",
+      "uuid" : "cbe88830-b2e0-11e4-8c4a-930a0b2071be",
+      "name" : "Podio",
+      "type" : "channel",
+      "category" : "channel",
+      "online" : true,
+      "nodeType" : {
+        "_id" : "0cf52d18-98b0-460e-8def-6d26864ce5b0",
+        "category" : "channel",
+        "description" : "Podio",
+        "enabled" : true,
+        "name" : "Podio",
+        "skynet" : {
+          "type" : "channel",
+          "subtype" : "podio"
+        },
+        "channelid" : "54458c5b5a370c58ca66a147",
+        "type" : "channel:podio"
+      },
+      "class" : "Podio",
+      "defaults" : {
+        "channelid" : "54458c5b5a370c58ca66a147",
+        "channelActivationId" : "54dce9d9f2377aaa0c8317c7",
+        "uuid" : "cbe88830-b2e0-11e4-8c4a-930a0b2071be",
+        "name" : "Podio",
+        "type" : "channel:podio",
+        "category" : "channel",
+        "online" : true,
+        "nodeType" : {
+          "_id" : "0cf52d18-98b0-460e-8def-6d26864ce5b0",
+          "category" : "channel",
+          "description" : "Podio",
+          "enabled" : true,
+          "name" : "Podio",
+          "skynet" : {
+            "type" : "channel",
+            "subtype" : "podio"
+          },
+          "channelid" : "54458c5b5a370c58ca66a147",
+          "type" : "channel:podio"
+        }
+      },
+      "input" : 1,
+      "output" : 1,
+      "formTemplatePath" : "/pages/node_forms/channel_form.html",
+      "logo" : "https://ds78apnml6was.cloudfront.net/channel/podio.svg",
+      "inputLocations" : [
+        27.5
+      ],
+      "outputLocations" : [
+        27.5
+      ],
+      "x" : 874,
+      "y" : 341,
+      "headerParams" : {
+
+      },
+      "urlParams" : {
+        ":type" : "item",
+        ":id" : "240705330"
+      },
+      "queryParams" : {
+        "alert_invite" : "true",
+        "hook" : "true",
+        "silent" : "false"
+      },
+      "bodyParams" : {
+        "fields" : "{{msg.fields}}"
+      },
+      "url" : "https://api.podio.com/comment/:type/:id/",
+      "method" : "POST",
+      "needsConfiguration" : false,
+      "needsSetup" : false,
+      "oauth" : {
+        "clientID" : "octoblu-dev",
+        "clientSecret" : "VwOTz26y37Iy2tZcojJnXwpQo9zizkndvNZToy8YNfMjSVWZk4VtlYXySmCRawCY",
+        "callbackURL" : "http://localhost:8080/api/oauth/podio/callback",
+        "tokenMethod" : "access_token_bearer",
+        "passReqToCallback" : true,
+        "authorizationURL" : "https://podio.com/oauth/authorize",
+        "tokenURL" : "https://podio.com/oauth/token",
+        "key" : "octoblu-dev",
+        "secret" : "VwOTz26y37Iy2tZcojJnXwpQo9zizkndvNZToy8YNfMjSVWZk4VtlYXySmCRawCY",
+        "access_token" : "2c512e1d8b1a4fc8bca094c5ee29f3b1"
+      },
+      "application" : {
+        "base" : "https://api.podio.com"
+      },
+      "z" : "c0273190-b2e0-11e4-8832-9de13c7bc92b",
+      "hash" : "d1b992a4",
+      "wires" : [
+        [
+          "dea68170-b2e0-11e4-b41b-d70027107b78"
+        ]
+      ]
+    }
+  ]
