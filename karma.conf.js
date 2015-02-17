@@ -15,7 +15,7 @@ module.exports = function(config) {
         "lib/angular/angular.js",
         "lib/angular-mocks/angular-mocks.js",
         "lib/lodash/lodash.js",
-        "../test/angular/test_helper.coffee",
+        "../test/test_helper.coffee",
         "app/**/*.coffee",
         "../test/**/*-spec.coffee"
     ],
