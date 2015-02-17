@@ -23,7 +23,7 @@ gulp.task 'bower:concat', ['bower'], ->
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
-  gulp.src ['./public/app/**/*.coffee']
+  gulp.src ['./app/**/*.coffee']
       .pipe plumber()
       .pipe coffee()
       .pipe concat('application.js')
@@ -43,5 +43,5 @@ gulp.task 'default', ['bower:concat', 'coffee:compile'], ->
 
 gulp.task 'watch', ['default', 'webserver'], ->
   gulp.watch ['./bower.json'], ['bower']
-  gulp.watch ['./public/app/**/*.js', './public/app/*.js'], ['javascript:concat']
-  gulp.watch ['./public/app/**/*.coffee', './public/app/*.coffee'], ['coffee:compile']
+  gulp.watch ['./public/app/**/*.js'], ['javascript:concat']
+  gulp.watch ['./app/**/*.coffee'], ['coffee:compile']
