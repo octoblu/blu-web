@@ -1,7 +1,8 @@
 describe 'TriggerService', =>
   beforeEach ->
     module 'blu', ($provide) =>
-      $provide.value '$cookies', {}
+      @cookies = {}
+      $provide.value '$cookies', @cookies
       return
 
     inject (_$httpBackend_, TriggerService) =>
@@ -28,8 +29,8 @@ describe 'TriggerService', =>
 
   describe 'when it is called with a uuid and token present but no trigger', ->
     beforeEach ->
-      @sut.uuid = 1
-      @sut.token = 2
+      @cookies.uuid = 1
+      @cookies.token = 2
 
     it 'should throw an error, "no trigger"', ->
       try
@@ -41,15 +42,15 @@ describe 'TriggerService', =>
 
   describe 'when it is called with a uuid and token present', ->
     beforeEach ->
-      @sut.uuid = 1
-      @sut.token = 2
+      @cookies.uuid = 1
+      @cookies.token = 2
       @trigger = flow: 1, uuid: 2, name: 3
 
     it 'should message meshblu using those credentials and data', ->
       @httpBackend.expectPOST(@messageTriggerUrl, {
           headers:
-            meshblu_auth_uuid: @sut.uuid
-            meshblu_auth_token: @sut.token
+            meshblu_auth_uuid: @cookies.uuid
+            meshblu_auth_token: @cookies.token
           data:
             devices: @trigger.flow
             topic: 'button'
@@ -76,21 +77,21 @@ describe 'TriggerService', =>
     describe 'when getTriggers is called with a uuid and token present', ->
       beforeEach ->
         @flowSearchUrl = 'meshblu.octoblu.com/devices?type=octoblu:flow'
-        @sut.uuid = 1
-        @sut.token = 2
+        @cookies.uuid = 1
+        @cookies.token = 2
 
       it 'should query meshblu using those credentials', ->
         @httpBackend.expectGET(@flowSearchUrl, (headers)=>
-          expect(headers.meshblu_auth_uuid).to.equal @sut.uuid
-          expect(headers.meshblu_auth_token).to.equal @sut.token
+          expect(headers.meshblu_auth_uuid).to.equal @cookies.uuid
+          expect(headers.meshblu_auth_token).to.equal @cookies.token
         ).respond()
         @sut.getTriggers()
         @httpBackend.flush()
 
       it 'should have the query parameter type=octoblu:flow', ->
         @httpBackend.expectGET(@flowSearchUrl, (headers)=>
-          expect(headers.meshblu_auth_uuid).to.equal @sut.uuid
-          expect(headers.meshblu_auth_token).to.equal @sut.token
+          expect(headers.meshblu_auth_uuid).to.equal @cookies.uuid
+          expect(headers.meshblu_auth_token).to.equal @cookies.token
         ).respond()
         @sut.getTriggers()
         @httpBackend.flush()
@@ -137,13 +138,13 @@ describe 'TriggerService', =>
 
     describe 'when getTriggers is called with a different uuid and token present', ->
       beforeEach ->
-        @sut.uuid = 'What?'
-        @sut.token = 'I\'m Hungry'
+        @cookies.uuid = 'What?'
+        @cookies.token = 'I\'m Hungry'
 
       it 'should query meshblu using those credentials', ->
         @httpBackend.expectGET(@flowSearchUrl, (headers)=>
-          expect(headers.meshblu_auth_uuid).to.equal @sut.uuid
-          expect(headers.meshblu_auth_token).to.equal @sut.token
+          expect(headers.meshblu_auth_uuid).to.equal @cookies.uuid
+          expect(headers.meshblu_auth_token).to.equal @cookies.token
         ).respond()
         @sut.getTriggers()
         @httpBackend.flush()
