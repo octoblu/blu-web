@@ -3,11 +3,14 @@ class LoginController
     @AuthenticatorService = AuthenticatorService
     @location = $location
     @cookies = $cookies
+    @uuid = $location.uuid
 
-  login: (pin) =>
-    @AuthenticatorService.authenticate @cookies.uuid, pin
+  login: (uuid, pin) =>
+    @AuthenticatorService.authenticate uuid, pin
       .then (token) =>
+        @cookies.uuid = uuid
         @cookies.token = token
+        @location.path "/#{uuid}"
       .catch (error) =>
         @error = error.message
 
