@@ -1,6 +1,7 @@
 describe 'TriggerService', =>
   beforeEach ->
     module 'blu', ($provide) =>
+      $provide.value '$cookies', {}
       return
 
     inject (_$httpBackend_, TriggerService) =>
