@@ -23,7 +23,7 @@ gulp.task 'bower:concat', ['bower'], ->
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
-  gulp.src ['./app/**/*.coffee']
+  gulp.src './app/**/*.coffee'
       .pipe plumber()
       .pipe coffee()
       .pipe concat('application.js')

@@ -3,10 +3,10 @@ angular
 .config ($routeProvider) ->
   $routeProvider
     .when '/',
-      templateUrl: '/app/register/register.html'
+      templateUrl: '/register.html'
       controller:  'RegisterController'
     .when '/:uuid', 
-      templateUrl: '/app/home/home.html'
+      templateUrl: '/home.html'
       controller:  'HomeController'
     .otherwise redirectTo: '/'
 .run ($rootScope, $location) ->
