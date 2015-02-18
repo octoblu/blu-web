@@ -10,6 +10,55 @@ describe 'TriggerService', =>
   it 'should exist', ->
     expect(@sut).to.exist
 
+  describe '->trigger', ->
+    beforeEach ->
+      @messageTriggerUrl = 'meshblu.octoblu.com/messages'
+    it 'should exist', ->
+      expect(@sut.trigger).to.exist
+
+  describe 'when it is called without a uuid and token present', ->
+    it 'should throw an error, "unauthenticated"', ->
+      try
+        @sut.trigger()
+      catch error
+        @error = error
+
+      expect(@error.message).to.equal "unauthenticated"
+
+  describe 'when it is called with a uuid and token present but no trigger', ->
+    beforeEach ->
+      @sut.uuid = 1
+      @sut.token = 2
+
+    it 'should throw an error, "no trigger"', ->
+      try
+        @sut.trigger()
+      catch error
+        @error = error
+
+      expect(@error.message).to.equal "no trigger"
+
+  describe 'when it is called with a uuid and token present', ->
+    beforeEach ->
+      @sut.uuid = 1
+      @sut.token = 2
+      @trigger = flow: 1, uuid: 2, name: 3
+
+    it 'should message meshblu using those credentials and data', ->
+      @httpBackend.expectPOST(@messageTriggerUrl, {
+          headers:
+            meshblu_auth_uuid: @sut.uuid
+            meshblu_auth_token: @sut.token
+          data:
+            devices: @trigger.flow
+            topic: 'button'
+            payload:
+              from: @trigger.uuid
+        }
+      ).respond()
+      @sut.trigger(@trigger.flow, @trigger.uuid)
+      @httpBackend.flush()
+
   describe '->getTriggers', ->
     it 'should exist', ->
       expect(@sut.getTriggers).to.exist
@@ -97,4 +146,6 @@ describe 'TriggerService', =>
         ).respond()
         @sut.getTriggers()
         @httpBackend.flush()
+
+
 
