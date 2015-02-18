@@ -37,3 +37,30 @@
 .red_pressed {
     background-color: #FF4444;
 }
+
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+}
+
+.pin-card {
+    flex: 1;
+    -webkit-flex: 1;
+    max-width: 12em;
+    font-size:3em;    
+}
+
+.pin-card input {
+    font-size:3em;    
+}
+
+.pin-button-container {
+    display: flex;
+    -webkit-display: flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+}
+
+.pin-button {
+    width: 62%;
+    height: 2em;
+}

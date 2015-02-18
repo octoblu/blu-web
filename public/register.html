@@ -1,19 +1,16 @@
 <md-content layout="row" layout-align="center">  
-  <md-card flex-lt-md="95" flex-md="66" flex-gt-md="50" >
-    <md-toolbar>
-      <h2 class="md-toolbar-tools">
-        <span>Register Device</span>
-      </h2>
-    </md-toolbar>
+  <md-card class="pin-card">
     <md-card-content>
       <form ng-submit="controller.register(pin)">
         <md-input-container flex>
-          <label>Pin</label>
+          <label>PIN</label>
           <input type="number" ng-model="pin">
-        </md-input-container>                
-        <md-button ng-click="controller.register(pin)">Register</md-button>
+        </md-input-container>
+        <div class="pin-button-container">                
+          <md-button class="md-primary md-raised pin-button" ng-click="controller.register(pin)">Register</md-button>
+        </div>
       </form>
-      <span>{{error}}</span>
+      <span>{{error}}</span>       
     </md-card-content>
   </md-card>
 </md-content>
