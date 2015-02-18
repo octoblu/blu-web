@@ -5,7 +5,6 @@ class RegisterController
     @str = "hi"
 
   register: (pin) =>
-    console.log pin
     @AuthenticatorService.registerWithPin(pin)
     .then (res) =>
       @location.path "/#{res.uuid}"

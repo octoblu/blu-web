@@ -7,23 +7,16 @@ class HomeController
 
     @triggers = [
       name: 'Tigers'
+      color: @nextColor()
     ,
       name: 'Axed'
+      color: @nextColor()
     ,
       name: 'Tragic Flaw'
+      color: @nextColor()
     ]
+    @TriggerService.getTriggers().then (@triggers) =>
     
-  login: (pin) =>
-    @AuthenticatorService.authenticate @$routeParams.uuid, pin
-      .then (token) =>
-        @TriggerService.uuid = @$routeParams.uuid
-        @TriggerService.token = token
-        @TriggerService.getTriggers()
-      .then (triggers) =>
-        @triggers = triggers
-      .catch (error) =>
-        @error = error.message
-
   nextColor: =>
     [
       'blue'

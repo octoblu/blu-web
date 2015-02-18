@@ -12,7 +12,6 @@ describe 'RegisterController', ->
         $location : @location
       })
 
-  beforeEach ->
   it 'should exist', ->
     expect(@sut).to.exist
 
@@ -73,7 +72,3 @@ describe 'RegisterController', ->
         @sut.register @pin
         @rootScope.$digest()
         expect(@location.path).to.have.been.calledWith @homePath
-
-
-
-

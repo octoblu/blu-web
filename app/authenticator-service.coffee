@@ -6,7 +6,5 @@ class AuthenticatorService
     @q (resolve, reject) =>
       resolve uuid: 'sawblade'
 
-
-
 angular.module('blu').service 'AuthenticatorService', AuthenticatorService
 
