@@ -2,7 +2,6 @@ class RegisterController
   constructor: (AuthenticatorService, $location) ->
     @AuthenticatorService = AuthenticatorService
     @location = $location
-    @str = "hi"
 
   register: (pin) =>
     @AuthenticatorService.registerWithPin(pin)

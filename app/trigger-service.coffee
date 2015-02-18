@@ -1,7 +1,8 @@
 class TriggerService
-  constructor: ($http)->
+  constructor: ($http, $cookies)->
     @http = $http
-
+    @uuid = $cookies.uuid
+    @token = $cookies.token
   trigger: (flow, uuid) =>
     throw new Error 'unauthenticated' unless @uuid && @token
     throw new Error 'no trigger' unless flow && uuid
