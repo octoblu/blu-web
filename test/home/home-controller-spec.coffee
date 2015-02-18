@@ -52,7 +52,15 @@ describe 'HomeController', ->
       it 'should set a message property with a message', ->
         @rootScope.$digest()
         expect(@sut.message).to.deep.equal @message
-  
+
+    describe 'when triggerService.getTriggers rejects the promise', ->
+      beforeEach ->
+        @error = 'ERROR WILL ROBINSON ERROR'
+        @getTriggers.reject @error
+      it 'should have an errorMsg property', ->
+        @rootScope.$digest()
+        expect(@sut.errorMsg).to.deep.equal @error
+        
   describe 'when the user does not have a valid uuid', ->
     beforeEach ->
       @cookies.uuid = undefined
