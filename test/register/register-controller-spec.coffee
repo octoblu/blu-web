@@ -47,14 +47,14 @@ describe 'RegisterController', ->
     describe 'when authenticatorService fulfills it\'s promise', ->
       beforeEach ->
         @deviceUUID = "b7d08bd0-5360-432c-9fd0-998fea6b802f"
-        @homePath = "/#{@deviceUUID}"
+        @loginPath = "/#{@deviceUUID}/login"
         @authenticatorService.registerWithPin.returns @q.when(uuid : @deviceUUID )
         @location.path = sinon.stub()
 
       it 'should redirect the user to the home location', ->
         @sut.register @pin
         @rootScope.$digest()
-        expect(@location.path).to.have.been.calledWith @homePath
+        expect(@location.path).to.have.been.calledWith @loginPath
 
       it 'should not have an error', ->
         @sut.register @pin
@@ -64,11 +64,11 @@ describe 'RegisterController', ->
     describe 'when authenticatorService fulfills it\'s promise', ->
       beforeEach ->
         @deviceUUID = "6f920317-72dd-40c0-ac03-7955b805dab0"
-        @homePath = "/#{@deviceUUID}"
+        @loginPath = "/#{@deviceUUID}/login"
         @authenticatorService.registerWithPin.returns @q.when(uuid : @deviceUUID )
         @location.path = sinon.stub()
 
       it 'should redirect the user to the home location', ->
         @sut.register @pin
         @rootScope.$digest()
-        expect(@location.path).to.have.been.calledWith @homePath
+        expect(@location.path).to.have.been.calledWith @loginPath
