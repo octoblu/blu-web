@@ -1,5 +1,10 @@
 class HomeController
-  constructor: (@AuthenticatorService, @TriggerService, @$routeParams) ->
+  constructor: (AuthenticatorService, TriggerService, $routeParams) ->
+    @AuthenticatorService = AuthenticatorService
+    @TriggerService = TriggerService
+    @routeParams = $routeParams
+    @colorIndex = 0 
+
     @triggers = [
       name: 'Tigers'
     ,
@@ -18,6 +23,15 @@ class HomeController
         @triggers = triggers
       .catch (error) =>
         @error = error.message
+
+  nextColor: =>
+    [
+      'blue'
+      'purple'
+      'green'
+      'orange'
+      'red'
+    ][@colorIndex++ % 5]
 
   triggerTheTrigger: (trigger) =>
     @TriggerService.trigger trigger.flow, trigger.uuid

@@ -2,8 +2,10 @@ class RegisterController
   constructor: (AuthenticatorService, $location) ->
     @AuthenticatorService = AuthenticatorService
     @location = $location
+    @str = "hi"
 
   register: (pin) =>
+    console.log pin
     @AuthenticatorService.registerWithPin(pin)
     .then (res) =>
       @location.path "/#{res.uuid}"

@@ -1,12 +1,9 @@
 gulp           = require 'gulp'
 bower          = require 'gulp-bower'
 concat         = require 'gulp-concat'
-jsoncombine    = require 'gulp-jsoncombine'
-less           = require 'gulp-less'
 plumber        = require 'gulp-plumber'
 sourcemaps     = require 'gulp-sourcemaps'
 coffee         = require 'gulp-coffee'
-clean          = require 'gulp-clean'
 webserver      = require 'gulp-webserver'
 _              = require 'lodash'
 mainBowerFiles = require 'main-bower-files'
@@ -34,7 +31,7 @@ gulp.task 'webserver', ->
   gulp.src './public'
       .pipe webserver({
         port: 8888
-        livereload: true
+        livereload: false
         directoryListing: false
         open: false
       })

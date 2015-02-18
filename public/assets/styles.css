@@ -1,0 +1,39 @@
+.blue {
+    background-color: #0099CC;
+}
+
+.blue_pressed {
+    background-color: #33B5E5;
+}
+
+.purple {
+    background-color: #9933CC;
+}
+
+.purple_pressed {
+    background-color: #AA66CC;
+}
+
+.green {
+    background-color: #669900;
+}
+
+.green_pressed {
+    background-color: #99CC00;
+}
+
+.orange {
+    background-color: #FF8800;
+}
+
+.orange_pressed {
+    background-color: #FFBB33;
+}
+
+.red {
+    background-color: #CC0000;
+}
+
+.red_pressed {
+    background-color: #FF4444;
+}
