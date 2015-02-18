@@ -1,27 +1,22 @@
 class TriggerService
-  constructor: ($http, $cookies)->
+  constructor: ($http)->
     @http = $http
-    @cookies = $cookies
-  trigger: (flow, uuid) =>
-    throw new Error 'unauthenticated' unless @cookies.uuid && @cookies.token
-    throw new Error 'no trigger' unless flow && uuid
-
+  trigger: (flowId, triggerId, uuid, token ) =>
     @http.post 'meshblu.octoblu.com/messages',
       headers:
-        meshblu_auth_uuid: @cookies.uuid
-        meshblu_auth_token: @cookies.token
+        meshblu_auth_uuid: uuid
+        meshblu_auth_token: token
       data:
-        devices: flow
+        devices: flowId
         topic: 'button'
         payload:
-          from: uuid
+          from: triggerId
 
-  getTriggers: =>
-    throw new Error 'unauthenticated' unless @cookies.uuid && @cookies.token
+  getTriggers: (uuid, token)=>
     @http.get 'meshblu.octoblu.com/devices?type=octoblu:flow',
       headers:
-        meshblu_auth_uuid: @cookies.uuid
-        meshblu_auth_token: @cookies.token
+        meshblu_auth_uuid: uuid
+        meshblu_auth_token: token
     .then (response) =>
       triggers = []
       return triggers unless response.data?.devices?
