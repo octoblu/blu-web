@@ -25,6 +25,8 @@ class HomeController
     ][@colorIndex++ % 5]
 
   triggerTheTrigger: (trigger) =>
-    @TriggerService.trigger trigger.flow, trigger.uuid, @cookies.uuid, @cookies.token
+    trigger.triggering = true
+    @TriggerService.trigger(trigger.flow, trigger.uuid, @cookies.uuid, @cookies.token).then ()=>
+      delete trigger.triggering
 
 angular.module('blu').controller 'HomeController', HomeController
