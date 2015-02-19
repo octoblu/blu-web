@@ -6,7 +6,7 @@ class HomeController
     @TriggerService = TriggerService
     @routeParams = $routeParams
     @colorIndex = 0 
-    
+
     @location.path('/') unless @cookies.uuid
     @location.path("/#{@cookies.uuid}/login") unless @cookies.token
     @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
@@ -25,6 +25,6 @@ class HomeController
     ][@colorIndex++ % 5]
 
   triggerTheTrigger: (trigger) =>
-    @TriggerService.trigger trigger.flow, trigger.uuid
+    @TriggerService.trigger trigger.flow, trigger.uuid, @cookies.uuid, @cookies.token
 
 angular.module('blu').controller 'HomeController', HomeController

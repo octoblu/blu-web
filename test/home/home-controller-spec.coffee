@@ -5,12 +5,15 @@ describe 'HomeController', ->
     inject ($controller, $q, $rootScope) ->      
       @q = $q
       @getTriggers = @q.defer()
+      @trigger = @q.defer()
       @rootScope = $rootScope
       @authenticatorService = {}
       @routeParams = {}
       @cookies = {}
       @location = path: sinon.stub()
-      @triggerService =  {getTriggers: sinon.stub().returns(@getTriggers.promise)}
+      @triggerService = 
+        getTriggers: sinon.stub().returns(@getTriggers.promise)
+        trigger: sinon.stub().returns(@trigger)
       @controller = $controller
       @sut = $controller('HomeController', {
         AuthenticatorService: @authenticatorService,
@@ -53,6 +56,31 @@ describe 'HomeController', ->
         @rootScope.$digest()
         expect(@sut.message).to.deep.equal @message
 
+    describe 'when the user triggers as a trigger (pew, pew)', ->
+      beforeEach ->
+        @cookies.uuid = 1
+        @cookies.token = 2
+        @trigger = {
+          flow : 1, 
+          uuid : 2, 
+          token : 3, 
+          name : 'Siamese'
+        }
+        @sut = @controller('HomeController', {
+          AuthenticatorService: @authenticatorService,
+          TriggerService : @triggerService,
+          $routeParams : @routeParams,
+          $cookies: @cookies,
+          $location: @location
+
+        })
+        @sut.triggerTheTrigger(@trigger)
+
+      it 'should call TriggerService.trigger', ->
+        @rootScope.$digest()
+        expect(@triggerService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid, @cookies.uuid, @cookies.token
+      
+
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
         @error = 'ERROR WILL ROBINSON ERROR'
@@ -89,7 +117,9 @@ describe 'HomeController', ->
       })
     it 'should redirect the user to the register page', ->
       expect(@location.path).to.have.been.calledWith '/1/login'
-      
+
+
+
     
     
 
