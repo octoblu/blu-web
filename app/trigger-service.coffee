@@ -2,15 +2,17 @@ class TriggerService
   constructor: ($http)->
     @http = $http
   trigger: (flowId, triggerId, uuid, token ) =>
-    @http.post 'https://meshblu.octoblu.com/messages',
+    @http.post 'https://meshblu.octoblu.com/messages', {
+      devices: [flowId]
+      topic: 'button'
+      payload:
+        from: triggerId
+    }, {
       headers:
         meshblu_auth_uuid: uuid
         meshblu_auth_token: token
-      data:
-        devices: flowId
-        topic: 'button'
-        payload:
-          from: triggerId
+    }
+
 
   getTriggers: (uuid, token)=>
     @http.get 'https://meshblu.octoblu.com/devices?type=octoblu:flow',
@@ -31,9 +33,8 @@ class TriggerService
     triggersInFlow = _.where device.flow, { type: 'trigger' }
     _.map triggersInFlow, (trigger) =>
         name: trigger.name
-        uuid: trigger.uuid
         flow: device.uuid
+        id: trigger.id
 
 
 angular.module('blu').service 'TriggerService', TriggerService
-
