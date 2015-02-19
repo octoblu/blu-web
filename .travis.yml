@@ -8,7 +8,7 @@ deploy:
   access_key_id: AKIAIT4X4NDGM2WVL6VA
   secret_access_key:
     secure: Q5Ns7G3ibVV8HrpI1GeZbypETL/MEywN0PuSljmW+0aYCERNgKqgU0Uy8AJrCy/ymfyCzmB+MD62Urq3ZCqWyVeVYJcKpYL518IlnOtv6KI2GXJgQ2eGFJSX5jw7fKvCh9Le0nw9TP7op8EHo22n16pUZkFupfkFajeR1JBmVnY=
-  bucket: blu.octoblu.com
+  bucket: blu.octoblu.com.s3-website-us-west-2.amazonaws.com
   endpoint: blu.octoblu.com.s3-website-us-west-2.amazonaws.com
   local-dir: public
   skip_cleanup: true
