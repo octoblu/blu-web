@@ -14,4 +14,4 @@ deploy:
   acl: public_read
   skip_cleanup: true
   on:
-    repo: octoblu/blu-web
+    branch: master
