@@ -44,12 +44,12 @@ describe 'HomeController', ->
     describe 'when triggerService.getTriggers resolves with no triggers', ->
       beforeEach ->
         @triggers = []
-        @message = 'You have no triggers. Visit app.octoblu.com/admin/groups to give Blu access to flows.'
+        @showHelpMessage = true
         @getTriggers.resolve @triggers
 
-      it 'should set a message property with a message', ->
+      it 'should set the showHelpMessage property to true', ->
         @rootScope.$digest()
-        expect(@sut.message).to.deep.equal @message
+        expect(@sut.showHelpMessage).to.be.true
 
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
