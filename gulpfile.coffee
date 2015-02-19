@@ -9,7 +9,7 @@ _              = require 'lodash'
 mainBowerFiles = require 'main-bower-files'
 
 gulp.task 'bower', ->
-  bower './public/lib'
+  bower './lib'
 
 gulp.task 'bower:concat', ['bower'], ->
   gulp.src mainBowerFiles filter: /\.js$/
@@ -17,6 +17,10 @@ gulp.task 'bower:concat', ['bower'], ->
       .pipe sourcemaps.init()
       .pipe concat('dependencies.js')
       .pipe sourcemaps.write('.')
+      .pipe gulp.dest('./public/assets/dist/')
+
+gulp.task 'bower:css', ['bower'], ->
+  gulp.src './lib/angular-material/angular-material.css'
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
@@ -36,9 +40,9 @@ gulp.task 'webserver', ->
         open: false
       })
 
-gulp.task 'default', ['bower:concat', 'coffee:compile'], ->
+gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
 
 gulp.task 'watch', ['default', 'webserver'], ->
-  gulp.watch ['./bower.json'], ['bower']
+  gulp.watch ['./bower.json'], ['bower:concat', 'bower:css']
   gulp.watch ['./public/app/**/*.js'], ['javascript:concat']
   gulp.watch ['./app/**/*.coffee'], ['coffee:compile']
