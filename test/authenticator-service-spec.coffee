@@ -65,9 +65,8 @@ describe 'AuthenticatorService', ->
       it 'should call the authenticate url for that uuid with the pin and respond with the token', (done) ->
         @httpBackend.expectPOST(@authenticateUrl,
           pin: @pin
-        ).respond(
-          token: 'tolkein'
-        )
+        ).respond(token: 'tolkein')
+
         @sut.authenticate(@uuid, @pin).then (token) =>
           expect(token).to.equal 'tolkein'
           done()

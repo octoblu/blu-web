@@ -2,31 +2,29 @@ describe 'HomeController', ->
   beforeEach ->
     module 'blu'
 
-    inject ($controller, $q, $rootScope) ->      
+    inject ($controller, $q, $rootScope) ->
       @q = $q
       @getTriggers = @q.defer()
       @triggerPromise = @q.defer()
       @rootScope = $rootScope
       @authenticatorService = {}
       @routeParams = {}
-      @cookies = {}
       @location = path: sinon.stub()
-      @triggerService = 
+      @triggerService =
         getTriggers: sinon.stub().returns(@getTriggers.promise)
         trigger: sinon.stub().returns(@triggerPromise)
       @controller = $controller
-      @sut = $controller('HomeController', {
+
+  describe 'when the user is authenticated (valid uuid | token)', ->
+    beforeEach ->
+      @sut = @controller('HomeController', {
         AuthenticatorService: @authenticatorService,
         TriggerService : @triggerService,
         $routeParams : @routeParams,
-        $cookies: @cookies,
+        $cookies: {uuid: 'uuid', token: 'token'},
         $location: @location
       })
 
-  it 'should exist', ->
-    expect(@sut).to.exist
-
-  describe 'when the user is authenticated (valid uuid | token)', ->
     it 'should call the triggerService.getTriggers', ->
       expect(@triggerService.getTriggers).to.have.been.called
 
@@ -57,14 +55,12 @@ describe 'HomeController', ->
 
     xdescribe 'when the user triggers as a trigger (pew, pew)', ->
       beforeEach ->
-        @cookies.uuid = 1
-        @cookies.token = 2
-        @trigger = 
-          flow : 1, 
-          uuid : 2, 
-          token : 3, 
+        @trigger =
+          flow : 1,
+          uuid : 2,
+          token : 3,
           name : 'Siamese'
-        @triggerService = 
+        @triggerService =
           getTriggers: sinon.stub().returns(@getTriggers.promise),
           trigger: sinon.stub().returns(@triggerPromise)
 
@@ -72,25 +68,25 @@ describe 'HomeController', ->
           AuthenticatorService: @authenticatorService,
           TriggerService : @triggerService,
           $routeParams : @routeParams,
-          $cookies: @cookies,
+          $cookies: {uuid: 1, token: 2},
           $location: @location
         })
         @sut.triggerTheTrigger @trigger
 
       it 'should call TriggerService.trigger with the flowId, flow uuid, user uuid, and user token', ->
         @rootScope.$digest()
-        expect(@triggerService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid, @cookies.uuid, @cookies.token
-      
+        expect(@triggerService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid, 1, 2
+
       it 'should add a triggering property to the trigger', ->
         expect(@trigger.triggering).to.exist
 
-      describe 'when TriggerService.getTriggers resolves with some triggers', -> 
+      describe 'when TriggerService.getTriggers resolves with some triggers', ->
         beforeEach ->
           @triggerPromise.resolve true
           @sut.triggerTheTrigger @trigger
-        it 'should remove the triggering property on the trigger', -> 
+        it 'should remove the triggering property on the trigger', ->
           @rootScope.$digest()
-          expect(@trigger.triggering).to.not.exist 
+          expect(@trigger.triggering).to.not.exist
 
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
@@ -99,15 +95,14 @@ describe 'HomeController', ->
       it 'should have an errorMsg property', ->
         @rootScope.$digest()
         expect(@sut.errorMsg).to.deep.equal @error
-        
+
   describe 'when the user does not have a valid uuid', ->
     beforeEach ->
-      @cookies.uuid = undefined
       @sut = @controller('HomeController', {
           AuthenticatorService: @authenticatorService,
           TriggerService : @triggerService,
           $routeParams : @routeParams,
-          $cookies: @cookies,
+          $cookies: {},
           $location: @location
 
         })
@@ -116,13 +111,11 @@ describe 'HomeController', ->
 
   describe 'when the user has a valid uuid but does not have a valid token', ->
     beforeEach ->
-      @cookies.uuid = 1
-      @cookies.token = undefined
       @sut = @controller('HomeController', {
         AuthenticatorService: @authenticatorService,
         TriggerService : @triggerService,
         $routeParams : @routeParams,
-        $cookies: @cookies,
+        $cookies: {uuid: 1, token: undefined},
         $location: @location
 
       })
@@ -131,10 +124,10 @@ describe 'HomeController', ->
 
 
 
-    
-    
 
-    
 
-      
+
+
+
+
 

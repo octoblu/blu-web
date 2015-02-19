@@ -5,7 +5,7 @@ class HomeController
     @AuthenticatorService = AuthenticatorService
     @TriggerService = TriggerService
     @routeParams = $routeParams
-    @colorIndex = 0 
+    @colorIndex = 0
 
     return @location.path('/') unless @cookies.uuid
     return @location.path("/#{@cookies.uuid}/login") unless @cookies.token
