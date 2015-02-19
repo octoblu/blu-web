@@ -1,22 +1,20 @@
 class HomeController
-  constructor: (AuthenticatorService, TriggerService, $routeParams) ->
+  constructor: (AuthenticatorService, TriggerService, $routeParams, $cookies, $location) ->
+    @location = $location
+    @cookies = $cookies
     @AuthenticatorService = AuthenticatorService
     @TriggerService = TriggerService
     @routeParams = $routeParams
     @colorIndex = 0 
 
-    @triggers = [
-      name: 'Tigers'
-      color: @nextColor()
-    ,
-      name: 'Axed'
-      color: @nextColor()
-    ,
-      name: 'Tragic Flaw'
-      color: @nextColor()
-    ]
-    @TriggerService.getTriggers().then (@triggers) =>
-    
+    @location.path('/') unless @cookies.uuid
+    @location.path("/#{@cookies.uuid}/login") unless @cookies.token
+    @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
+      if @triggers.length < 1
+        @message = 'You have no triggers. Visit app.octoblu.com/admin/groups to give Blu access to flows.'
+    .catch (@error) =>
+      @errorMsg = @error
+
   nextColor: =>
     [
       'blue'
@@ -27,6 +25,6 @@ class HomeController
     ][@colorIndex++ % 5]
 
   triggerTheTrigger: (trigger) =>
-    @TriggerService.trigger trigger.flow, trigger.uuid
+    @TriggerService.trigger trigger.flow, trigger.uuid, @cookies.uuid, @cookies.token
 
 angular.module('blu').controller 'HomeController', HomeController
