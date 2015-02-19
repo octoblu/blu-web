@@ -14,12 +14,12 @@ describe 'AuthenticatorService', ->
   describe '->registerWithPin', ->
     beforeEach ->
       @pinUrl = 'https://pin.octoblu.com/devices'
-    
+
     describe 'when called', ->
 
       it 'should post to pin.octoblu.com with the pin and the device type', ->
         @httpBackend.expectPOST(@pinUrl, {
-          data:            
+          data:
             pin: '12345'
             device:
               type: 'blu'
@@ -27,11 +27,11 @@ describe 'AuthenticatorService', ->
         ).respond()
 
         @sut.registerWithPin '12345'
-        @httpBackend.flush()        
+        @httpBackend.flush()
 
       it 'should post to pin.octoblu.com with the pin and the device type', ->
         @httpBackend.expectPOST(@pinUrl, {
-          data:            
+          data:
             pin: '12345 stop it hurts aaaaaaaagh'
             device:
               type: 'blu'
@@ -54,22 +54,21 @@ describe 'AuthenticatorService', ->
          @httpBackend.expectPOST(@pinUrl).respond uuid: @uuid
          @sut.registerWithPin('what does Aaron want?').then (@result) =>
          @httpBackend.flush()
-         
+
          expect(@result.uuid).to.equal @uuid
 
   describe '->authenticate', ->
-    
+
     describe 'when it is called with a uuid and pin', ->
-      beforeEach ->        
+      beforeEach ->
         @uuid = 'copy-and-paste-4-ever'
         @pin = 'Erik thinks so'
         @authenticateUrl = "https://pin.octoblu.com/devices/#{@uuid}/sessions"
 
       it 'should call the authenticate url for that uuid with the pin', ->
         @httpBackend.expectPOST(@authenticateUrl,
-          data:            
-            pin: @pin                      
+          data:
+            pin: @pin
         ).respond()
-        console.log @sut
         @sut.authenticate @uuid, @pin
-        @httpBackend.flush()        
+        @httpBackend.flush()

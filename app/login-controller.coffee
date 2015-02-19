@@ -6,7 +6,6 @@ class LoginController
     @uuid = $routeParams.uuid
 
   login: (uuid, pin) =>
-    console.log uuid, pin
     @AuthenticatorService.authenticate uuid, pin
       .then (token) =>
         @cookies.uuid = uuid

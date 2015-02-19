@@ -13,6 +13,7 @@ describe 'LoginController', ->
         AuthenticatorService: @authenticatorService
         $location : @location
         $cookies : @cookies
+        $routeParams: {}
       })
 
   describe '->login', ->
@@ -20,16 +21,16 @@ describe 'LoginController', ->
       beforeEach ->
         @authenticatorService.authenticate = sinon.stub().returns @q.when()
 
-      it 'should call authenticatorService.authenticate with the uuid and pin entered', ->        
+      it 'should call authenticatorService.authenticate with the uuid and pin entered', ->
         @sut.login 'U1', '12345'
         expect(@authenticatorService.authenticate).to.have.been.calledWith 'U1', '12345'
 
-      it 'should call authenticatorService.authenticate with the uuid and pin entered', ->        
+      it 'should call authenticatorService.authenticate with the uuid and pin entered', ->
         @sut.login 'U2', '54321'
         expect(@authenticatorService.authenticate).to.have.been.calledWith 'U2', '54321'
 
       describe 'when authenticatorService->authenticate() resolves a token', ->
-        beforeEach ->          
+        beforeEach ->
           @authenticatorService.authenticate.returns @q.when('awesomeness')
 
         it 'should set the session token cookie', ->
@@ -56,7 +57,7 @@ describe 'LoginController', ->
           @sut.login 'Repete', '54321'
           @rootScope.$digest()
           expect(@location.path).to.have.been.calledWith '/Repete'
- 
+
       describe 'when authenticatorService->authenticate() resolves a different token', ->
         beforeEach ->
           @authenticatorService.authenticate.returns @q.when('supercool')
