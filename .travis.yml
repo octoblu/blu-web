@@ -1,0 +1,17 @@
+language: node_js
+sudo: false
+node_js:
+- '0.10'
+before_deploy: './node_modules/.bin/gulp'
+deploy:
+  provider: s3
+  access_key_id: AKIAIT4X4NDGM2WVL6VA
+  secret_access_key:
+    secure: CV9XpBThn+x8TPooh+n7OpFp3DRMPweNgJzjMeFdZAcbzv9n56Ij3Mj3p53YNbclBD3Q5lvPvsI9YSV1kJxIS4OfAz5AVbrMAWw5J9U+lVjbCrA2Y0zx79uzadpySwf2eKFdFg2cr1MxMPRAZo4Ri1ePnec8ShXfYH+1i5ZW6IY=
+  bucket: blu-web
+  local-dir: public
+  endpoint: blu-web.s3-website-us-west-2.amazonaws.com
+  acl: public_read
+  skip_cleanup: true
+  on:
+    repo: octoblu/blu-web
