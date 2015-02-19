@@ -1,14 +1,22 @@
 class AuthenticatorService
-  constructor: ($q) ->
+  constructor: ($q, $http) ->
     @q = $q
+    @http = $http
 
-  registerWithPin: =>
-    @q (resolve, reject) =>
-      resolve uuid: 'sawblade'
+  registerWithPin: (pin)=>
+    @http.post('https://pin.octoblu.com/devices', {
+          data: {            
+            pin: pin
+            device:
+              type: 'blu'
+          }
+        }).then (result) => result.data
 
-  authenticate: =>
-    @q (resolve, reject) =>
-      resolve uuid: 'sawblade'
+  authenticate: (uuid, pin) =>
+    @http.post("https://pin.octoblu.com/devices/#{uuid}/sessions", {
+          data:
+            pin: pin
+        }).then (result) => result.data
 
 angular.module('blu').service 'AuthenticatorService', AuthenticatorService
 
