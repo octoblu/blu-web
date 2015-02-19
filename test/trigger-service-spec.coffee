@@ -12,7 +12,7 @@ describe 'TriggerService', =>
 
   describe '->trigger', ->
     beforeEach ->
-      @messageTriggerUrl = 'meshblu.octoblu.com/messages'
+      @messageTriggerUrl = 'https://meshblu.octoblu.com/messages'
     it 'should exist', ->
       expect(@sut.trigger).to.exist
 
@@ -43,7 +43,7 @@ describe 'TriggerService', =>
 
     describe 'when getTriggers is called with a uuid and token present', ->
       beforeEach ->
-        @flowSearchUrl = 'meshblu.octoblu.com/devices?type=octoblu:flow'
+        @flowSearchUrl = 'https://meshblu.octoblu.com/devices?type=octoblu:flow'
         @uuid = 1
         @token = 2
 
