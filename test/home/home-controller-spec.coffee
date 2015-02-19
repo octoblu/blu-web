@@ -11,18 +11,25 @@ describe 'HomeController', ->
       @triggerService =
         getTriggers: sinon.stub().returns(@getTriggers.promise)
         trigger: sinon.stub().returns(@triggerPromise)
+      @deviceService =
+        getDevice: sinon.stub().returns $q.when(owner: 'owner-uuid')
       @controller = $controller
 
   describe 'when the user is authenticated (valid uuid | token)', ->
     beforeEach ->
       @sut = @controller('HomeController', {
         TriggerService : @triggerService,
+        DeviceService : @deviceService,
         $cookies: {uuid: 'uuid', token: 'token'},
         $location: @location
       })
+      @rootScope.$digest()
+
+    it 'should call the deviceService.getDevice', ->
+      expect(@deviceService.getDevice).to.have.been.calledWith 'uuid', 'token'
 
     it 'should call the triggerService.getTriggers', ->
-      expect(@triggerService.getTriggers).to.have.been.called
+      expect(@triggerService.getTriggers).to.have.been.calledWith 'uuid', 'token', 'owner-uuid'
 
     describe 'when triggerService.getTriggers resolves with a list of triggers', ->
       beforeEach ->
@@ -44,12 +51,12 @@ describe 'HomeController', ->
     describe 'when triggerService.getTriggers resolves with no triggers', ->
       beforeEach ->
         @triggers = []
-        @showHelpMessage = true
+        @noFlows = true
         @getTriggers.resolve @triggers
 
-      it 'should set the showHelpMessage property to true', ->
+      it 'should set the noFlows property to true', ->
         @rootScope.$digest()
-        expect(@sut.showHelpMessage).to.be.true
+        expect(@sut.noFlows).to.be.true
 
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->

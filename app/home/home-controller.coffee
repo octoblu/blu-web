@@ -1,22 +1,27 @@
 class HomeController
-  constructor: (TriggerService, $cookies, $location) ->
-    @location = $location
+  constructor: ($cookies, $location, DeviceService, TriggerService) ->
     @cookies = $cookies
+    @location = $location
+    @DeviceService = DeviceService
     @TriggerService = TriggerService
     @colorIndex = 0
 
     return @location.path('/') unless @cookies.uuid
     return @location.path("/#{@cookies.uuid}/login") unless @cookies.token
 
-    @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
-      if @triggers.length < 1
-        @showHelpMessage = true
+    @DeviceService.getDevice(@cookies.uuid, @cookies.token)
+      .then (device) =>
+        unless device.owner?
+          @notClaimed = true
+          return
 
-      _.each @triggers, (trigger) =>
-        trigger.color = "##{trigger.id[0...6]}"
+        @TriggerService.getTriggers(@cookies.uuid, @cookies.token, device.owner).then (@triggers) =>
+          @noFlows = _.isEmpty @triggers
 
-    .catch (@error) =>
-      @errorMsg = @error
+          _.each @triggers, (trigger) =>
+            trigger.color = "##{trigger.id[0...6]}"
+      .catch (@error) =>
+        @errorMsg = @error
 
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true

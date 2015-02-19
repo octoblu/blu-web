@@ -1,10 +1,19 @@
-<md-content layout="row" ng-if="showHelpMessage">
-  <md-card>
-    <p>
-      You currently have no flows with triggers or haven't given permission for the blu-web-app to access your flows. To do so, visit https://app.octoblu.com/admin/groups
+<md-content layout="row" ng-if="controller.notClaimed" layout-align="center">
+  <md-card flex="50">
+    <p layout-margin>
+      Blu has created a new device, go to the <a href="https://app.octoblu.com/node-wizard/add-device/53c9b832f400e177dca325b3">Octoblu Add Node Page</a> to claim it.
     </p>
   </md-card>
 </md-content>
+
+<md-content layout="row" ng-if="controller.noFlows" layout-align="center">
+  <md-card flex="50">
+    <p layout-margin>
+      You currently have no flows with triggers or haven't given permission for the blu-web-app to access your flows. To do so, visit the <a href="https://app.octoblu.com/admin/groups">Octoblu Admin Page.</a>
+    </p>
+  </md-card>
+</md-content>
+
 <md-grid-list
       md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
       md-row-height-gt-md="1:1" md-row-height="4:3"

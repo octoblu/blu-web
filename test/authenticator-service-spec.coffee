@@ -8,6 +8,7 @@ describe 'AuthenticatorService', ->
       @httpBackend = $httpBackend
       @sut = AuthenticatorService
 
+
   it 'should exist', ->
     expect(@sut).to.exist
 

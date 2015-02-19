@@ -1,7 +1,6 @@
 describe 'TriggerService', =>
   beforeEach ->
-    module 'blu', ($provide) =>
-      return
+    module 'blu', =>
 
     inject (_$httpBackend_, TriggerService) =>
       @httpBackend = _$httpBackend_
@@ -34,67 +33,69 @@ describe 'TriggerService', =>
   describe '->getTriggers', ->
     it 'should exist', ->
       expect(@sut.getTriggers).to.exist
-
+      
     describe 'when getTriggers is called with a uuid and token', ->
+      beforeEach ->
+        @sut.getTriggers 'device-uuid', 'device-token', 'owner-uuid'
+        return null
+      
       it 'should query meshblu using those credentials', ->
-        @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow', (headers)=>
+        @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow&owner=owner-uuid', (headers)=>
           expect(headers.meshblu_auth_uuid).to.equal  'device-uuid'
           expect(headers.meshblu_auth_token).to.equal 'device-token'
         ).respond()
-        @sut.getTriggers('device-uuid', 'device-token')
         @httpBackend.flush()
 
-      describe 'when meshblu returns some flows', ->
-        beforeEach ->
-          flow = {
-            flow: [
-              { type: 'trigger', name: 'Women Trigger', id: 1234 }
-              { type: 'bacon', id: 4321 }
-              { type: 'not-something-important', id: 2341 }
-            ],
-            uuid: 6789
-          }
-          @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow').respond devices: [ flow ]
+    describe 'when meshblu returns some flows', ->
+      beforeEach ->
+        flow = {
+          flow: [
+            { type: 'trigger', name: 'Women Trigger', id: 1234 }
+            { type: 'bacon', id: 4321 }
+            { type: 'not-something-important', id: 2341 }
+          ],
+          uuid: 6789
+        }
+        @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow&owner=owner-uuid').respond devices: [ flow ]
 
-        it 'should return a list containing one trigger', ->
-          @sut.getTriggers(null, null).then (triggers) =>
-            expect(triggers.length).to.equal 1
-          @httpBackend.flush()
+      it 'should return a list containing one trigger', ->
+        @sut.getTriggers(null, null, 'owner-uuid').then (triggers) =>
+          expect(triggers.length).to.equal 1
+        @httpBackend.flush()
 
-        it 'should return a correctly formatted trigger', ->
-          @sut.getTriggers(null, null).then (triggers) =>
-            expect(triggers).to.deep.equal [{flow: 6789, name: 'Women Trigger', id: 1234 }]
-          @httpBackend.flush()
+      it 'should return a correctly formatted trigger', ->
+        @sut.getTriggers(null, null, 'owner-uuid').then (triggers) =>
+          expect(triggers).to.deep.equal [{flow: 6789, name: 'Women Trigger', id: 1234 }]
+        @httpBackend.flush()
 
-      describe 'when meshblu returns a different flow', ->
-        beforeEach ->
-          flow = {
-            flow: [
-              { type: 'bacon', id: 12345 }
-              { type: 'trigger', name: 'Monster Trigger', id: 128937 }
-              { type: 'not-something-important', id: 90123 }
-            ],
-            uuid: 1589
-          }
-          @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow').respond devices: [ flow ]
+    describe 'when meshblu returns a different flow', ->
+      beforeEach ->
+        flow = {
+          flow: [
+            { type: 'bacon', id: 12345 }
+            { type: 'trigger', name: 'Monster Trigger', id: 128937 }
+            { type: 'not-something-important', id: 90123 }
+          ],
+          uuid: 1589
+        }
+        @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow&owner=owner-uuid').respond devices: [ flow ]
 
-        it 'should return a correctly formatted trigger', ->
-          @sut.getTriggers(@uuid, @token).then (triggers) =>
-            expect(triggers).to.deep.equal [{flow: 1589, name: 'Monster Trigger', id: 128937 }]
-          @httpBackend.flush()
+      it 'should return a correctly formatted trigger', ->
+        @sut.getTriggers(@uuid, @token, 'owner-uuid').then (triggers) =>
+          expect(triggers).to.deep.equal [{flow: 1589, name: 'Monster Trigger', id: 128937 }]
+        @httpBackend.flush()
 
 
     describe 'when getTriggers is called with a different uuid and token present', ->
       beforeEach ->
-        @uuid = 'What?'
-        @token = 'I\'m Hungry'
+        @sut.getTriggers 'bludgeoned-with-trophy', 'treachery', 'owner-uuid'
+        return null
 
       it 'should query meshblu using those credentials', ->
-        @httpBackend.expectGET(@flowSearchUrl, (headers)=>
-          expect(headers.meshblu_auth_uuid).to.equal @uuid
-          expect(headers.meshblu_auth_token).to.equal @token
+        @httpBackend.expectGET('https://meshblu.octoblu.com/devices?type=octoblu:flow&owner=owner-uuid', (headers)=>
+          expect(headers.meshblu_auth_uuid).to.equal 'bludgeoned-with-trophy'
+          expect(headers.meshblu_auth_token).to.equal 'treachery'
         ).respond()
-        @sut.getTriggers @uuid, @token
         @httpBackend.flush()
 
 
