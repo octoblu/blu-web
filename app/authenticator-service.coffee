@@ -13,7 +13,7 @@ class AuthenticatorService
   authenticate: (uuid, pin) =>
     @http.post("https://pin.octoblu.com/devices/#{uuid}/sessions", {
             pin: pin
-        }).then (result) => result.data
+        }).then (result) => result.data.token
 
 angular.module('blu').service 'AuthenticatorService', AuthenticatorService
 

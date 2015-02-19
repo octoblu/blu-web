@@ -2,7 +2,7 @@ class TriggerService
   constructor: ($http)->
     @http = $http
   trigger: (flowId, triggerId, uuid, token ) =>
-    @http.post 'meshblu.octoblu.com/messages',
+    @http.post 'https://meshblu.octoblu.com/messages',
       headers:
         meshblu_auth_uuid: uuid
         meshblu_auth_token: token
@@ -13,7 +13,7 @@ class TriggerService
           from: triggerId
 
   getTriggers: (uuid, token)=>
-    @http.get 'meshblu.octoblu.com/devices?type=octoblu:flow',
+    @http.get 'https://meshblu.octoblu.com/devices?type=octoblu:flow',
       headers:
         meshblu_auth_uuid: uuid
         meshblu_auth_token: token

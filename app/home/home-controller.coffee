@@ -7,8 +7,9 @@ class HomeController
     @routeParams = $routeParams
     @colorIndex = 0 
 
-    @location.path('/') unless @cookies.uuid
-    @location.path("/#{@cookies.uuid}/login") unless @cookies.token
+    return @location.path('/') unless @cookies.uuid
+    return @location.path("/#{@cookies.uuid}/login") unless @cookies.token
+
     @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
       if @triggers.length < 1
         @message = 'You have no triggers. Visit app.octoblu.com/admin/groups to give Blu access to flows.'
