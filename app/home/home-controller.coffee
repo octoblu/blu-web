@@ -10,7 +10,7 @@ class HomeController
 
     @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
       if @triggers.length < 1
-        @message = 'You have no triggers. Visit app.octoblu.com/admin/groups to give Blu access to flows.'
+        @showHelpMessage = true
     .catch (@error) =>
       @errorMsg = @error
 
@@ -22,6 +22,7 @@ class HomeController
       'orange'
       'red'
     ][@colorIndex++ % 5]
+
 
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true
