@@ -22,6 +22,7 @@ describe 'AuthenticatorService', ->
             pin: '12345'
             device:
               type: 'blu'
+              online: true
           }
         ).respond()
 
@@ -33,6 +34,7 @@ describe 'AuthenticatorService', ->
             pin: '12345 stop it hurts aaaaaaaagh'
             device:
               type: 'blu'
+              online: true
           }
         ).respond()
 

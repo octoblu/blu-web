@@ -8,6 +8,7 @@ class AuthenticatorService
             pin: "#{pin}"
             device:
               type: 'blu'
+              online: true
         }).then (result) => result.data
 
   authenticate: (uuid, pin) =>
