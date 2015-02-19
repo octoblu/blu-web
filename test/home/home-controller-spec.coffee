@@ -28,11 +28,11 @@ describe 'HomeController', ->
       beforeEach ->
         @triggers = [
             flow: 1
-            id: 2
+            id: 'sdlkfj'
             name: 'calico'
           ,
             flow: 2
-            id: 3
+            id: 'ssdf' 
             name: 'tabby'
           ]
         @getTriggers.resolve @triggers
