@@ -1,10 +1,8 @@
 class HomeController
-  constructor: (AuthenticatorService, TriggerService, $routeParams, $cookies, $location) ->
+  constructor: (TriggerService, $cookies, $location) ->
     @location = $location
     @cookies = $cookies
-    @AuthenticatorService = AuthenticatorService
     @TriggerService = TriggerService
-    @routeParams = $routeParams
     @colorIndex = 0
 
     return @location.path('/') unless @cookies.uuid

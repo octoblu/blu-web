@@ -7,8 +7,6 @@ describe 'HomeController', ->
       @getTriggers = @q.defer()
       @triggerPromise = @q.defer()
       @rootScope = $rootScope
-      @authenticatorService = {}
-      @routeParams = {}
       @location = path: sinon.stub()
       @triggerService =
         getTriggers: sinon.stub().returns(@getTriggers.promise)
@@ -18,9 +16,7 @@ describe 'HomeController', ->
   describe 'when the user is authenticated (valid uuid | token)', ->
     beforeEach ->
       @sut = @controller('HomeController', {
-        AuthenticatorService: @authenticatorService,
         TriggerService : @triggerService,
-        $routeParams : @routeParams,
         $cookies: {uuid: 'uuid', token: 'token'},
         $location: @location
       })
@@ -65,9 +61,7 @@ describe 'HomeController', ->
           trigger: sinon.stub().returns(@triggerPromise)
 
         @sut = @controller('HomeController', {
-          AuthenticatorService: @authenticatorService,
           TriggerService : @triggerService,
-          $routeParams : @routeParams,
           $cookies: {uuid: 1, token: 2},
           $location: @location
         })
@@ -99,9 +93,7 @@ describe 'HomeController', ->
   describe 'when the user does not have a valid uuid', ->
     beforeEach ->
       @sut = @controller('HomeController', {
-          AuthenticatorService: @authenticatorService,
           TriggerService : @triggerService,
-          $routeParams : @routeParams,
           $cookies: {},
           $location: @location
 
@@ -112,12 +104,9 @@ describe 'HomeController', ->
   describe 'when the user has a valid uuid but does not have a valid token', ->
     beforeEach ->
       @sut = @controller('HomeController', {
-        AuthenticatorService: @authenticatorService,
         TriggerService : @triggerService,
-        $routeParams : @routeParams,
         $cookies: {uuid: 1, token: undefined},
         $location: @location
-
       })
     it 'should redirect the user to the register page', ->
       expect(@location.path).to.have.been.calledWith '/1/login'
