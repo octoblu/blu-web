@@ -49,39 +49,6 @@ describe 'HomeController', ->
         @rootScope.$digest()
         expect(@sut.message).to.deep.equal @message
 
-    xdescribe 'when the user triggers as a trigger (pew, pew)', ->
-      beforeEach ->
-        @trigger =
-          flow : 1,
-          uuid : 2,
-          token : 3,
-          name : 'Siamese'
-        @triggerService =
-          getTriggers: sinon.stub().returns(@getTriggers.promise),
-          trigger: sinon.stub().returns(@triggerPromise)
-
-        @sut = @controller('HomeController', {
-          TriggerService : @triggerService,
-          $cookies: {uuid: 1, token: 2},
-          $location: @location
-        })
-        @sut.triggerTheTrigger @trigger
-
-      it 'should call TriggerService.trigger with the flowId, flow uuid, user uuid, and user token', ->
-        @rootScope.$digest()
-        expect(@triggerService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid, 1, 2
-
-      it 'should add a triggering property to the trigger', ->
-        expect(@trigger.triggering).to.exist
-
-      describe 'when TriggerService.getTriggers resolves with some triggers', ->
-        beforeEach ->
-          @triggerPromise.resolve true
-          @sut.triggerTheTrigger @trigger
-        it 'should remove the triggering property on the trigger', ->
-          @rootScope.$digest()
-          expect(@trigger.triggering).to.not.exist
-
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
         @error = 'ERROR WILL ROBINSON ERROR'
