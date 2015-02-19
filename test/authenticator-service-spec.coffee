@@ -56,16 +56,19 @@ describe 'AuthenticatorService', ->
          expect(@result.uuid).to.equal @uuid
 
   describe '->authenticate', ->
-
     describe 'when it is called with a uuid and pin', ->
       beforeEach ->
         @uuid = 'copy-and-paste-4-ever'
         @pin = 'Erik thinks so'
         @authenticateUrl = "https://pin.octoblu.com/devices/#{@uuid}/sessions"
 
-      it 'should call the authenticate url for that uuid with the pin', ->
+      it 'should call the authenticate url for that uuid with the pin and respond with the token', (done) ->
         @httpBackend.expectPOST(@authenticateUrl,
           pin: @pin
-        ).respond()
-        @sut.authenticate @uuid, @pin
+        ).respond(
+          token: 'tolkein'
+        )
+        @sut.authenticate(@uuid, @pin).then (token) =>
+          expect(token).to.equal 'tolkein'
+          done()
         @httpBackend.flush()
