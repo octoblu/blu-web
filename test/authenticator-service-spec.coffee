@@ -19,7 +19,6 @@ describe 'AuthenticatorService', ->
 
       it 'should post to pin.octoblu.com with the pin and the device type', ->
         @httpBackend.expectPOST(@pinUrl, {
-          data:
             pin: '12345'
             device:
               type: 'blu'
@@ -31,7 +30,6 @@ describe 'AuthenticatorService', ->
 
       it 'should post to pin.octoblu.com with the pin and the device type', ->
         @httpBackend.expectPOST(@pinUrl, {
-          data:
             pin: '12345 stop it hurts aaaaaaaagh'
             device:
               type: 'blu'
@@ -67,8 +65,7 @@ describe 'AuthenticatorService', ->
 
       it 'should call the authenticate url for that uuid with the pin', ->
         @httpBackend.expectPOST(@authenticateUrl,
-          data:
-            pin: @pin
+          pin: @pin
         ).respond()
         @sut.authenticate @uuid, @pin
         @httpBackend.flush()
