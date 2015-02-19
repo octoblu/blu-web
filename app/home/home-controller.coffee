@@ -11,22 +11,16 @@ class HomeController
     @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
       if @triggers.length < 1
         @showHelpMessage = true
+
+      _.each @triggers, (trigger) =>
+        trigger.color = "##{trigger.id[0...6]}"
+
     .catch (@error) =>
       @errorMsg = @error
 
-  nextColor: =>
-    [
-      'blue'
-      'purple'
-      'green'
-      'orange'
-      'red'
-    ][@colorIndex++ % 5]
-
-
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true
-    @TriggerService.trigger(trigger.flow, trigger.uuid, @cookies.uuid, @cookies.token).then ()=>
+    @TriggerService.trigger(trigger.flow, trigger.id, @cookies.uuid, @cookies.token).then ()=>
       delete trigger.triggering
 
 angular.module('blu').controller 'HomeController', HomeController

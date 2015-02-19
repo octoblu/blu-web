@@ -20,7 +20,6 @@
     "angular-cookies": "~1.3.13",
     "angular-route": "~1.3.13",
     "angular-mocks": "~1.3.13",
-    "angular-material": "master",
-    "font-awesome": "~4.3.0"
+    "angular-material": "master"
   }
 }

@@ -1,5 +1,15 @@
+.trigger {
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.trigger h3 {
+    font-size: 1.2em;
+}
+
 .pressed {
     opacity: 0.5;
+    cursor: default;
 }
 
 input[type=number]::-webkit-inner-spin-button {

@@ -28,14 +28,15 @@ describe 'HomeController', ->
       beforeEach ->
         @triggers = [
             flow: 1
-            uuid: 2
+            id: 2
             name: 'calico'
           ,
             flow: 2
-            uuid: 3
+            id: 3
             name: 'tabby'
           ]
         @getTriggers.resolve @triggers
+
       it 'should set a triggers property with the list of triggers', ->
         @rootScope.$digest()
         expect(@sut.triggers).to.deep.equal @triggers
@@ -45,6 +46,7 @@ describe 'HomeController', ->
         @triggers = []
         @showHelpMessage = true
         @getTriggers.resolve @triggers
+
       it 'should set the showHelpMessage property to true', ->
         @rootScope.$digest()
         expect(@sut.showHelpMessage).to.be.true
@@ -53,6 +55,7 @@ describe 'HomeController', ->
       beforeEach ->
         @error = 'ERROR WILL ROBINSON ERROR'
         @getTriggers.reject @error
+        
       it 'should have an errorMsg property', ->
         @rootScope.$digest()
         expect(@sut.errorMsg).to.deep.equal @error

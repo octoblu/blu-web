@@ -20,7 +20,7 @@ gulp.task 'bower:concat', ['bower'], ->
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'bower:css', ['bower'], ->
-  gulp.src './lib/angular-material/angular-material.css'
+  gulp.src [ './lib/angular-material/angular-material.css']
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->

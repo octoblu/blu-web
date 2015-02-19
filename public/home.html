@@ -11,11 +11,12 @@
       md-gutter="8px" md-gutter-gt-sm="4px" >
   <md-grid-tile ng-repeat="trigger in controller.triggers"
                 md-rowspan="1"
-                md-colspan="1"
-                class="{{trigger.color}}"
+                md-colspan="2"
+                class="trigger"
                 ng-class="{ pressed: trigger.triggering}"
                 ng-click="controller.triggerTheTrigger(trigger)"
-                style="cursor: pointer;" >
+                ng-style="{'background-color': trigger.color}" >
+      <i class="fa fa-spin fa-gear" ng-show="trigger.triggering"></i>
       <md-grid-tile-footer><h3>{{trigger.name}}</h3></md-grid-tile-footer>
   </md-grid-tile>
 </md-grid-list>
