@@ -1,44 +1,8 @@
-.blue {
-    background-color: #0099CC;
+.pressed {
+    opacity: 0.5;
 }
 
-.blue_pressed {
-    background-color: #33B5E5;
-}
-
-.purple {
-    background-color: #9933CC;
-}
-
-.purple_pressed {
-    background-color: #AA66CC;
-}
-
-.green {
-    background-color: #669900;
-}
-
-.green_pressed {
-    background-color: #99CC00;
-}
-
-.orange {
-    background-color: #FF8800;
-}
-
-.orange_pressed {
-    background-color: #FFBB33;
-}
-
-.red {
-    background-color: #CC0000;
-}
-
-.red_pressed {
-    background-color: #FF4444;
-}
-
-input[type=number]::-webkit-inner-spin-button { 
+input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
@@ -46,11 +10,11 @@ input[type=number]::-webkit-inner-spin-button {
     flex: 1;
     -webkit-flex: 1;
     max-width: 12em;
-    font-size:3em;    
+    font-size:3em;
 }
 
 .pin-card input {
-    font-size:3em;    
+    font-size:3em;
 }
 
 .pin-button-container {
