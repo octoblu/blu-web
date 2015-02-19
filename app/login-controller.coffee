@@ -1,11 +1,12 @@
 class LoginController
-  constructor: (AuthenticatorService, $location, $cookies) ->
+  constructor: (AuthenticatorService, $location, $routeParams, $cookies) ->
     @AuthenticatorService = AuthenticatorService
     @location = $location
     @cookies = $cookies
-    @uuid = $location.uuid
+    @uuid = $routeParams.uuid
 
   login: (uuid, pin) =>
+    console.log uuid, pin
     @AuthenticatorService.authenticate uuid, pin
       .then (token) =>
         @cookies.uuid = uuid
