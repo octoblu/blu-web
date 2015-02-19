@@ -12,9 +12,9 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        "public/lib/angular/angular.js",
-        "public/lib/angular-mocks/angular-mocks.js",
-        "public/lib/lodash/lodash.js",
+        "lib/angular/angular.js",
+        "lib/angular-mocks/angular-mocks.js",
+        "lib/lodash/lodash.js",
         "test/test_helper.coffee",
         "app/**/*.coffee",
         "test/**/*-spec.coffee"
