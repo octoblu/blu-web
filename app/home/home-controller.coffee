@@ -18,16 +18,6 @@ class HomeController
     .catch (@error) =>
       @errorMsg = @error
 
-  nextColor: =>
-    [
-      'blue'
-      'purple'
-      'green'
-      'orange'
-      'red'
-    ][@colorIndex++ % 5]
-
-
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true
     @TriggerService.trigger(trigger.flow, trigger.id, @cookies.uuid, @cookies.token).then ()=>
