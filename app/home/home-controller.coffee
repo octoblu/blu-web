@@ -11,6 +11,10 @@ class HomeController
     @TriggerService.getTriggers(@cookies.uuid, @cookies.token).then (@triggers) =>
       if @triggers.length < 1
         @showHelpMessage = true
+
+      _.each @triggers, (trigger) =>
+        trigger.color = "##{trigger.id[0...6]}"
+
     .catch (@error) =>
       @errorMsg = @error
 

@@ -5,9 +5,8 @@
   <md-grid-tile ng-repeat="trigger in controller.triggers"
                 md-rowspan="1"
                 md-colspan="1"
-                ng-class="nextColor"
                 ng-click="controller.triggerTheTrigger(trigger)"
-                style="cursor: pointer;" >
+                ng-style="{cursor: 'pointer', 'background-color': trigger.color}" >
       <md-grid-tile-footer><h3>{{trigger.name}}</h3></md-grid-tile-footer>
   </md-grid-tile>
 </md-grid-list>
