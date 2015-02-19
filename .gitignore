@@ -7,3 +7,4 @@ meshblu.json
 *.sublime-workspace
 public/assets/dist
 public/app/compiled/*
+blu-web.sublime-workspace
