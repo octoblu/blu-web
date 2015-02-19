@@ -5,7 +5,7 @@ describe 'HomeController', ->
     inject ($controller, $q, $rootScope) ->      
       @q = $q
       @getTriggers = @q.defer()
-      @trigger = @q.defer()
+      @triggerPromise = @q.defer()
       @rootScope = $rootScope
       @authenticatorService = {}
       @routeParams = {}
@@ -13,7 +13,7 @@ describe 'HomeController', ->
       @location = path: sinon.stub()
       @triggerService = 
         getTriggers: sinon.stub().returns(@getTriggers.promise)
-        trigger: sinon.stub().returns(@trigger)
+        trigger: sinon.stub().returns(@triggerPromise)
       @controller = $controller
       @sut = $controller('HomeController', {
         AuthenticatorService: @authenticatorService,
@@ -21,7 +21,6 @@ describe 'HomeController', ->
         $routeParams : @routeParams,
         $cookies: @cookies,
         $location: @location
-
       })
 
   it 'should exist', ->
@@ -56,30 +55,42 @@ describe 'HomeController', ->
         @rootScope.$digest()
         expect(@sut.message).to.deep.equal @message
 
-    describe 'when the user triggers as a trigger (pew, pew)', ->
+    xdescribe 'when the user triggers as a trigger (pew, pew)', ->
       beforeEach ->
         @cookies.uuid = 1
         @cookies.token = 2
-        @trigger = {
+        @trigger = 
           flow : 1, 
           uuid : 2, 
           token : 3, 
           name : 'Siamese'
-        }
+        @triggerService = 
+          getTriggers: sinon.stub().returns(@getTriggers.promise),
+          trigger: sinon.stub().returns(@triggerPromise)
+
         @sut = @controller('HomeController', {
           AuthenticatorService: @authenticatorService,
           TriggerService : @triggerService,
           $routeParams : @routeParams,
           $cookies: @cookies,
           $location: @location
-
         })
-        @sut.triggerTheTrigger(@trigger)
+        @sut.triggerTheTrigger @trigger
 
-      it 'should call TriggerService.trigger', ->
+      it 'should call TriggerService.trigger with the flowId, flow uuid, user uuid, and user token', ->
         @rootScope.$digest()
         expect(@triggerService.trigger).to.have.been.calledWith @trigger.flow, @trigger.uuid, @cookies.uuid, @cookies.token
       
+      it 'should add a triggering property to the trigger', ->
+        expect(@trigger.triggering).to.exist
+
+      describe 'when TriggerService.getTriggers resolves with some triggers', -> 
+        beforeEach ->
+          @triggerPromise.resolve true
+          @sut.triggerTheTrigger @trigger
+        it 'should remove the triggering property on the trigger', -> 
+          @rootScope.$digest()
+          expect(@trigger.triggering).to.not.exist 
 
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
