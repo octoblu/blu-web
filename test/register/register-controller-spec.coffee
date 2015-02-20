@@ -9,66 +9,65 @@ describe 'RegisterController', ->
   describe 'when the user has no existing session', ->
     beforeEach ->
       inject ($controller, $rootScope) ->
-        @location = {}
-        @authenticatorService = {}
+        @location = path: sinon.stub()
+        @authenticatorService = registerWithPin: sinon.stub()
+        @cookies = {}
         @sut = $controller 'RegisterController',
-          $cookies: {}
+          $cookies: @cookies
           $location: @location
           AuthenticatorService: @authenticatorService
 
-    describe 'when register is called', ->
-    beforeEach ->
-      @pin = "1234"
-      @authenticatorService.registerWithPin = sinon.stub().returns @q.when()
-
-    it 'should call have been called with the pin', ->
-      @sut.register @pin
-      expect(@authenticatorService.registerWithPin).to.have.been.calledWith @pin
-
-    describe 'when called with a different pin', ->
+    describe 'when authenticatorService rejects its promise', ->
       beforeEach ->
-        @pin = "12345"
-      it 'should call AuthenticatorService.registerWithPin with the new pin', ->
-        @sut.register @pin
-        expect(@authenticatorService.registerWithPin).to.have.been.calledWith @pin
+        @authenticatorService.registerWithPin.returns @q.reject(new Error('oh no'))
 
-    describe 'when authenticatorService rejects it\'s promise', ->
+      it "should tell the user that it couldn't register a device", ->
+        @sut.register '1234'
+        @rootScope.$digest()
+        expect(@sut.errorMessage).to.equal 'Unable to register a new device. Please try again.'
+
+    describe 'when registerWithPin fulfills its promise with shock', ->
       beforeEach ->
-        @authenticatorService.registerWithPin.returns @q.reject('oh no')
+        @authenticatorService.registerWithPin.returns @q.when(uuid: 'shock', token: 'and-aww-yeah')
 
-      it 'should tell the user that it couldn\'t register a device', ->
-        @sut.register @pin
-        @rootScope.$digest()
-        expect(@sut.error).to.equal 'Unable to register a new device. Please try again.'
+      describe 'when called with the pin 1234', ->
+        beforeEach ->
+          @sut.register '1234'
+          @rootScope.$digest()
 
-    describe 'when authenticatorService fulfills it\'s promise', ->
+        it 'should call authenticatorService registerWithPin with the pin', ->
+          expect(@authenticatorService.registerWithPin).to.have.been.calledWith '1234'
+
+        it 'should not have an error', ->
+          expect(@sut.error).to.not.exist
+
+        it 'should set the uuid in the cookies', ->
+          expect(@cookies.uuid).to.equal 'shock'
+
+        it 'should set the uuid in the cookies', ->
+          expect(@cookies.token).to.equal 'and-aww-yeah'
+
+    describe 'when registerWithPin fulfills their promise', ->
       beforeEach ->
-        @deviceUUID = "b7d08bd0-5360-432c-9fd0-998fea6b802f"
-        @loginPath = "/#{@deviceUUID}/login"
-        @authenticatorService.registerWithPin.returns @q.when(uuid : @deviceUUID )
-        @location.path = sinon.stub()
+        @authenticatorService.registerWithPin.returns @q.when(uuid: 'slow-turning-windmill', token: 'how-quixotic')
 
-      it 'should redirect the user to the home location', ->
-        @sut.register @pin
-        @rootScope.$digest()
-        expect(@location.path).to.have.been.calledWith @loginPath
+      describe 'when called with the pin 6543', ->
+        beforeEach ->
+          @sut.register '6543'
+          @rootScope.$digest()
 
-      it 'should not have an error', ->
-        @sut.register @pin
-        @rootScope.$digest()
-        expect(@sut.error).to.not.exist
+        it 'should call authenticatorService registerWithPin with the pin', ->
+          expect(@authenticatorService.registerWithPin).to.have.been.calledWith '6543'
 
-    describe 'when authenticatorService fulfills it\'s promise', ->
-      beforeEach ->
-        @deviceUUID = "6f920317-72dd-40c0-ac03-7955b805dab0"
-        @loginPath = "/#{@deviceUUID}/login"
-        @authenticatorService.registerWithPin.returns @q.when(uuid : @deviceUUID )
-        @location.path = sinon.stub()
+        it 'should set the uuid in the cookies', ->
+          expect(@cookies.uuid).to.equal 'slow-turning-windmill'
 
-      it 'should redirect the user to the home location', ->
-        @sut.register @pin
-        @rootScope.$digest()
-        expect(@location.path).to.have.been.calledWith @loginPath
+        it 'should set the token in the cookies', ->
+          expect(@cookies.uuid).to.equal 'slow-turning-windmill'
+
+        it 'should redirect the user to the home page', ->
+          expect(@location.path).to.have.been.calledWith '/slow-turning-windmill'
+
 
   describe 'when the user has an existing session', ->
     beforeEach ->

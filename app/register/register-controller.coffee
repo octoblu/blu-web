@@ -9,8 +9,10 @@ class RegisterController
   register: (pin) =>
     @AuthenticatorService.registerWithPin(pin)
     .then (res) =>
-      @location.path "/#{res.uuid}/login"
+      @cookies.uuid = res.uuid
+      @cookies.token = res.token
+      @location.path "/#{res.uuid}"
     .catch =>
-      @error = "Unable to register a new device. Please try again."
+      @errorMessage = "Unable to register a new device. Please try again."
 
 angular.module('blu').controller 'RegisterController', RegisterController
