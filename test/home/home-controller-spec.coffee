@@ -48,6 +48,10 @@ describe 'HomeController', ->
         @rootScope.$digest()
         expect(@sut.triggers).to.deep.equal @triggers
 
+      it 'should set triggersLoaded to true', ->
+        @rootScope.$digest()
+        expect(@sut.triggersLoaded).to.be.true
+
     describe 'when triggerService.getTriggers resolves with no triggers', ->
       beforeEach ->
         @triggers = []

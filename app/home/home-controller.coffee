@@ -13,6 +13,7 @@ class HomeController
     devicePromise = @DeviceService.getDevice(@cookies.uuid, @cookies.token)
     devicePromise.catch @redirectToLogin
     devicePromise.then (@device) =>
+      @triggersLoaded = true
       return @notClaimed = true unless @device.owner?
 
       @refreshTriggers().catch (error) =>
