@@ -8,22 +8,27 @@ class HomeController
     @randomRobotId = _.sample [1...9]
 
     return @location.path('/') unless @cookies.uuid
-    return @location.path("/#{@cookies.uuid}/login") unless @cookies.token
+    return @redirectToLogin() unless @cookies.token
 
-    @DeviceService.getDevice(@cookies.uuid, @cookies.token)
-      .then (device) =>
-        unless device.owner?
-          @notClaimed = true
-          return
+    devicePromise = @DeviceService.getDevice(@cookies.uuid, @cookies.token)
+    devicePromise.catch @redirectToLogin
+    devicePromise.then (@device) =>
+      return @notClaimed = true unless @device.owner?
 
-        @TriggerService.getTriggers(@cookies.uuid, @cookies.token, device.owner).then (@triggers) =>
-          @noFlows = _.isEmpty @triggers
+      @refreshTriggers().catch (error) =>
+        @errorMessage = error.message
 
-          _.each @triggers, (trigger, i) =>
-            trigger.color = "##{trigger.id[0...6]}"
-            trigger.span  = if i % 5 == 0 then 2 else 1
-      .catch (@error) =>
-        @errorMsg = @error
+
+  redirectToLogin: =>
+    @location.path "/#{@cookies.uuid}/login"
+
+  refreshTriggers: =>
+    @TriggerService.getTriggers(@cookies.uuid, @cookies.token, @device.owner).then (@triggers) =>
+      @noFlows = _.isEmpty @triggers
+
+      _.each @triggers, (trigger, i) =>
+        trigger.color = "##{trigger.id[0...6]}"
+        trigger.span  = if i % 5 == 0 then 2 else 1
 
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true

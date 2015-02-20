@@ -60,12 +60,15 @@ describe 'HomeController', ->
 
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
-        @error = 'ERROR WILL ROBINSON ERROR'
-        @getTriggers.reject @error
+        @getTriggers.reject new Error 'ERROR WILL ROBINSON ERROR'
         
       it 'should have an errorMsg property', ->
         @rootScope.$digest()
-        expect(@sut.errorMsg).to.deep.equal @error
+        expect(@sut.errorMessage).to.equal 'ERROR WILL ROBINSON ERROR'
+
+      it 'should not redirect to login property', ->
+        @rootScope.$digest()
+        expect(@location.path).not.to.have.been.called
 
   describe 'when the user does not have a valid uuid', ->
     beforeEach ->
@@ -78,22 +81,40 @@ describe 'HomeController', ->
     it 'should redirect the user to the register page', ->
       expect(@location.path).to.have.been.calledWith '/'
 
-  describe 'when the user has a valid uuid but does not have a valid token', ->
+  describe 'when the user has a valid uuid but does not have a token', ->
     beforeEach ->
-      @sut = @controller('HomeController', {
-        TriggerService : @triggerService,
-        $cookies: {uuid: 1, token: undefined},
+      @sut = @controller 'HomeController', 
+        $cookies: {uuid: 1, token: undefined}
         $location: @location
-      })
+        DeviceService:  {}
+        TriggerService: {}
+
     it 'should redirect the user to the register page', ->
       expect(@location.path).to.have.been.calledWith '/1/login'
 
+  describe 'when deviceService rejects on getDevice', ->
+    beforeEach ->
+      @deviceService = getDevice: sinon.stub().returns @q.reject(new Error('Unauthorized'))
+      @sut = @controller 'HomeController', 
+        $cookies: {uuid: 'ascension', token: 'what goes up, must come DEAD'}
+        $location: @location
+        DeviceService:  @deviceService
+        TriggerService: {}
+      @rootScope.$digest()
 
+    it 'should redirect the user to the register page', ->
+      expect(@location.path).to.have.been.calledWith '/ascension/login'
 
+  describe 'when deviceService rejects a different device on getDevice', ->
+    beforeEach ->
+      @deviceService = getDevice: sinon.stub().returns @q.reject(new Error('Unauthorized'))
+      @sut = @controller 'HomeController', 
+        $cookies: {uuid: 'sex-injury', token: 'Awwww yeeeaahhurkghf'}
+        $location: @location
+        DeviceService:  @deviceService
+        TriggerService: {}
+      @rootScope.$digest()
 
-
-
-
-
-
+    it 'should redirect the user to the register page', ->
+      expect(@location.path).to.have.been.calledWith '/sex-injury/login'
 

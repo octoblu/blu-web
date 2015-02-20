@@ -1,7 +1,10 @@
 class RegisterController
-  constructor: (AuthenticatorService, $location) ->
-    @AuthenticatorService = AuthenticatorService
+  constructor: ($cookies, $location, AuthenticatorService) ->
+    @cookies  = $cookies
     @location = $location
+    @AuthenticatorService = AuthenticatorService
+
+    @location.path "/#{@cookies.uuid}" if @cookies.uuid?
 
   register: (pin) =>
     @AuthenticatorService.registerWithPin(pin)

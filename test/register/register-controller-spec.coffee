@@ -4,22 +4,19 @@ describe 'RegisterController', ->
 
     inject ($controller, $q, $rootScope) ->
       @q = $q
-      @authenticatorService = {}
-      @location = {}
       @rootScope = $rootScope
-      @sut = $controller('RegisterController', {
-        AuthenticatorService: @authenticatorService,
-        $location : @location
-      })
 
-  it 'should exist', ->
-    expect(@sut).to.exist
+  describe 'when the user has no existing session', ->
+    beforeEach ->
+      inject ($controller, $rootScope) ->
+        @location = {}
+        @authenticatorService = {}
+        @sut = $controller 'RegisterController',
+          $cookies: {}
+          $location: @location
+          AuthenticatorService: @authenticatorService
 
-
-  it 'should add a register function to the instance', ->
-    expect(@sut.register).to.exist
-
-  describe 'when register is called', ->
+    describe 'when register is called', ->
     beforeEach ->
       @pin = "1234"
       @authenticatorService.registerWithPin = sinon.stub().returns @q.when()
@@ -72,3 +69,34 @@ describe 'RegisterController', ->
         @sut.register @pin
         @rootScope.$digest()
         expect(@location.path).to.have.been.calledWith @loginPath
+
+  describe 'when the user has an existing session', ->
+    beforeEach ->
+      @location = path: sinon.spy()
+
+      inject ($controller, $rootScope) =>
+        @sut = $controller 'RegisterController',
+          $cookies: 
+            uuid:  'some-uuid'
+            token: 'some-token'
+          $location: @location
+          AuthenticatorService: {}
+
+    it 'should call location.path', ->
+      expect(@location.path).to.have.been.calledWith '/some-uuid'
+
+  describe 'when a different user has an existing session', ->
+    beforeEach ->
+      @location = path: sinon.spy()
+
+      inject ($controller, $rootScope) =>
+        @sut = $controller 'RegisterController',
+          $cookies: 
+            uuid:  'voracious-animals'
+            token: 'token'
+          $location: @location
+          AuthenticatorService: {}
+
+    it 'should call location.path', ->
+      expect(@location.path).to.have.been.calledWith '/voracious-animals'
+
