@@ -5,6 +5,7 @@ class HomeController
     @DeviceService = DeviceService
     @TriggerService = TriggerService
     @colorIndex = 0
+    @randomRobotId = _.sample [1...9]
 
     return @location.path('/') unless @cookies.uuid
     return @location.path("/#{@cookies.uuid}/login") unless @cookies.token

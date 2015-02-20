@@ -38,3 +38,7 @@ input[type=number]::-webkit-inner-spin-button {
     width: 62%;
     height: 2em;
 }
+
+.text-center {
+    text-align: center;
+}

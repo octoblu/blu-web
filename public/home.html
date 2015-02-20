@@ -1,17 +1,36 @@
-<md-content layout="row" ng-if="controller.notClaimed" layout-align="center">
-  <md-card flex="50">
-    <p layout-margin>
-      Blu has created a new device, go to the <a href="https://app.octoblu.com/node-wizard/add-device/53c9b832f400e177dca325b3">Octoblu Add Node Page</a> to claim it.
-    </p>
-  </md-card>
-</md-content>
+<md-content layout="row" ng-if="controller.notClaimed || controller.noFlows" layout-align="center">
+  <div flex="100" flex-gt-md="50" flex-gt-lg="25" layout="column" class="text-center">
+    <md-toolbar ng-if="controller.notClaimed"><h2>Unclaimed Device</h2></md-toolbar>
+    <md-toolbar ng-if="controller.noFlows"><h2>No Flows</h2></md-toolbar>
 
-<md-content layout="row" ng-if="controller.noFlows" layout-align="center">
-  <md-card flex="50">
-    <p layout-margin>
-      You currently have no flows with triggers or haven't given permission for the blu-web-app to access your flows. To do so, visit the <a href="https://app.octoblu.com/admin/groups">Octoblu Admin Page.</a>
-    </p>
-  </md-card>
+    <div>
+      <img ng-src="/assets/robots/robot{{controller.randomRobotId}}.png" layout-fill width="50%">
+    </div>
+
+    <div ng-if="controller.notClaimed">
+      <h2 layout-margin>
+        Blu has created a new device, go to the Octoblu Add Node Page to claim it.
+      </h2>
+
+      <h1>
+        <md-button href="https://app.octoblu.com/node-wizard/add-device/53c9b832f400e177dca325b3" class="md-raised md-primary" aria-label="Claim Device">
+          Claim Device
+        </md-button>
+      </h1>
+    </div>
+
+    <div ng-if="controller.noFlows">
+      <h2 layout-margin>
+        You currently have no flows with triggers or haven't given permission for the blu-web-app to access your flows. To do so, visit the Octoblu Admin Page.
+      </h2>
+
+      <h1>
+        <md-button href="https://app.octoblu.com/admin/groups" class="md-raised md-primary" aria-label="Add Flows">
+          Add Flows
+        </md-button>
+      </h1>
+    </div>
+  </div>
 </md-content>
 
 <md-grid-list
