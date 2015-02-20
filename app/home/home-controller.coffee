@@ -19,8 +19,9 @@ class HomeController
         @TriggerService.getTriggers(@cookies.uuid, @cookies.token, device.owner).then (@triggers) =>
           @noFlows = _.isEmpty @triggers
 
-          _.each @triggers, (trigger) =>
+          _.each @triggers, (trigger, i) =>
             trigger.color = "##{trigger.id[0...6]}"
+            trigger.span  = if i % 5 == 0 then 2 else 1
       .catch (@error) =>
         @errorMsg = @error
 
@@ -28,5 +29,6 @@ class HomeController
     trigger.triggering = true
     @TriggerService.trigger(trigger.flow, trigger.id, @cookies.uuid, @cookies.token).then ()=>
       delete trigger.triggering
+
 
 angular.module('blu').controller 'HomeController', HomeController
