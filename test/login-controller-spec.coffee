@@ -76,4 +76,4 @@ describe 'LoginController', ->
         it 'should add the error message to itself so the user can see it', ->
           @sut.login 'U1', '1337'
           @rootScope.$digest()
-          expect(@sut.error).to.equal @message
+          expect(@sut.errorMessage).to.equal @message

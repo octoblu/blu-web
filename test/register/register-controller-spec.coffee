@@ -17,6 +17,20 @@ describe 'RegisterController', ->
           $location: @location
           AuthenticatorService: @authenticatorService
 
+    describe 'when register is called with an empty string', ->
+      beforeEach ->
+        @sut.register ''
+
+      it 'should set an errorMessage explaining that a pin is required', ->
+        expect(@sut.errorMessage).to.equal @sut.ERROR_NO_PIN
+
+    describe 'when register is called with not-a-number', ->
+      beforeEach ->
+        @sut.register 'not-a-number'
+
+      it 'should set an errorMessage explaining that the pin needs to be a number', ->
+        expect(@sut.errorMessage).to.equal @sut.ERROR_PIN_NOT_NUMERIC
+
     describe 'when authenticatorService rejects its promise', ->
       beforeEach ->
         @authenticatorService.registerWithPin.returns @q.reject(new Error('oh no'))

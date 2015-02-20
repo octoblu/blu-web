@@ -1,4 +1,7 @@
 class RegisterController
+  ERROR_NO_PIN : "Pin cannot be empty"
+  ERROR_PIN_NOT_NUMERIC : "Pin must be a number"
+
   constructor: ($cookies, $location, AuthenticatorService) ->
     @cookies  = $cookies
     @location = $location
@@ -7,6 +10,8 @@ class RegisterController
     @location.path "/#{@cookies.uuid}" if @cookies.uuid?
 
   register: (pin) =>
+    return @errorMessage = @ERROR_NO_PIN if _.isEmpty pin
+    return @errorMessage = @ERROR_PIN_NOT_NUMERIC unless /^\d+$/.test pin
     @AuthenticatorService.registerWithPin(pin)
     .then (res) =>
       @cookies.uuid = res.uuid

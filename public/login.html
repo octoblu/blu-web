@@ -1,14 +1,15 @@
 <md-content layout="row" layout-align="center">  
   <md-card class="pin-card">   
     <md-card-content>
-      <form ng-submit="controller.login(controller.uuid, pin)">
+      <form ng-submit="controller.login(controller.uuid, pin)" novalidate>
         <md-input-container flex>
           <label>PIN</label>
-          <input type="password" ng-model="pin">
+          <input type="password" ng-model="pin" required>
         </md-input-container>                       
         <div class="pin-button-container">
           <md-button class="md-primary md-raised pin-button">Login</md-button>
         </div>
+        <p class="text-center text-warning">{{controller.errorMessage}}</p>
       </form>
     </md-card-content>
   </md-card>

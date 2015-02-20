@@ -46,3 +46,7 @@ input[type=number]::-webkit-inner-spin-button {
 md-grid-tile {
     transition: all 400ms ease-out 50ms; 
 }
+
+.text-warning {
+    color: rgb(244, 67, 54);
+}

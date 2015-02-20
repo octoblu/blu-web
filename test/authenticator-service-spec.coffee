@@ -17,7 +17,6 @@ describe 'AuthenticatorService', ->
       @pinUrl = 'https://pin.octoblu.com/devices'
 
     describe 'when called', ->
-
       it 'should post to pin.octoblu.com with the pin and the device type', ->
         @httpBackend.expectPOST(@pinUrl, {
             pin: '12345'
@@ -59,18 +58,28 @@ describe 'AuthenticatorService', ->
          expect(@result.uuid).to.equal @uuid
 
   describe '->authenticate', ->
-    describe 'when it is called with a uuid and pin', ->
+    describe 'when the service responds with a 201', ->
       beforeEach ->
-        @uuid = 'copy-and-paste-4-ever'
-        @pin = 'Erik thinks so'
-        @authenticateUrl = "https://pin.octoblu.com/devices/#{@uuid}/sessions"
+        @httpBackend.expectPOST('https://pin.octoblu.com/devices/copy-and-paste-4-ever/sessions',
+          pin: 'Erik thinks so'
+        ).respond(201, token: 'tolkein')
 
-      it 'should call the authenticate url for that uuid with the pin and respond with the token', (done) ->
-        @httpBackend.expectPOST(@authenticateUrl,
-          pin: @pin
-        ).respond(token: 'tolkein')
+      describe 'when it is called with a uuid and pin', ->
+        it 'should call the authenticate url for that uuid with the pin and respond with the token', (done) ->
+          @sut.authenticate('copy-and-paste-4-ever', 'Erik thinks so').then (token) =>
+            expect(token).to.equal 'tolkein'
+            done()
+          @httpBackend.flush()
 
-        @sut.authenticate(@uuid, @pin).then (token) =>
-          expect(token).to.equal 'tolkein'
-          done()
-        @httpBackend.flush()
+    describe 'when the service responds with a non-201', ->
+      beforeEach ->
+        @httpBackend.expectPOST('https://pin.octoblu.com/devices/copy-and-paste-4-ever/sessions',
+          pin: 'Erik thinks so'
+        ).respond(401, 'you done screwed up')
+
+      describe 'when it is called with a uuid and pin', ->
+        it 'should reject the promise and return the error', (done) ->
+          @sut.authenticate('copy-and-paste-4-ever', 'Erik thinks so').catch (error) =>
+            expect(error.message).to.equal 'you done screwed up'
+            done()
+          @httpBackend.flush()

@@ -12,7 +12,7 @@ class LoginController
         @cookies.token = token
         @location.path "/#{uuid}"
       .catch (error) =>
-        @error = error.message
+        @errorMessage = error.message
 
 
 angular.module('blu').controller 'LoginController', LoginController
