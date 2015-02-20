@@ -1,8 +1,5 @@
 <md-content layout="row" ng-if="controller.notClaimed || controller.noFlows" layout-align="center">
   <div flex="100" flex-gt-md="50" flex-gt-lg="25" layout="column" class="text-center">
-    <md-toolbar ng-if="controller.notClaimed"><h2>Unclaimed Device</h2></md-toolbar>
-    <md-toolbar ng-if="controller.noFlows"><h2>No Flows</h2></md-toolbar>
-
     <div>
       <img ng-src="/assets/robots/robot{{controller.randomRobotId}}.png" layout-fill width="50%">
     </div>
