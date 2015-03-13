@@ -43,8 +43,8 @@
       md-row-height-gt-md="1:1" md-row-height="4:3"
       md-gutter="8px" md-gutter-gt-sm="4px" layout-margin>
   <md-grid-tile ng-repeat="trigger in controller.triggers"
-                md-rowspan="{{trigger.span}}"
-                md-colspan="{{trigger.span}}"
+                md-rowspan="1"
+                md-colspan="2"
                 class="trigger"
                 ng-class="{ pressed: trigger.triggering}"
                 ng-click="controller.triggerTheTrigger(trigger)"

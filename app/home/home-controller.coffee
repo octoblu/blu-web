@@ -29,7 +29,6 @@ class HomeController
 
       _.each @triggers, (trigger, i) =>
         trigger.color = "##{trigger.id[0...6]}"
-        trigger.span  = if i % 5 == 0 then 2 else 1
 
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true
