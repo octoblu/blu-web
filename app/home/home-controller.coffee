@@ -1,7 +1,8 @@
 class HomeController
-  constructor: ($cookies, $location, DeviceService, TriggerService) ->
+  constructor: ($cookies, $location, $routeParams, DeviceService, TriggerService) ->
     @cookies = $cookies
     @location = $location
+    @routeParams = $routeParams
     @DeviceService = DeviceService
     @TriggerService = TriggerService
     @colorIndex = 0
@@ -9,7 +10,7 @@ class HomeController
 
     return @redirectToLogin() unless @cookies.token
 
-    devicePromise = @DeviceService.getDevice(@cookies.uuid, @cookies.token)
+    devicePromise = @DeviceService.getDevice(@routeParams.uuid, @cookies.token)
     devicePromise.catch @redirectToLogin
     devicePromise.then (@device) =>
       @triggersLoaded = true
@@ -20,10 +21,10 @@ class HomeController
 
 
   redirectToLogin: =>
-    @location.path "/#{@cookies.uuid}/login"
+    @location.path "/#{@routeParams.uuid}/login"
 
   refreshTriggers: =>
-    @TriggerService.getTriggers(@cookies.uuid, @cookies.token, @device.owner).then (@triggers) =>
+    @TriggerService.getTriggers(@routeParams.uuid, @cookies.token, @device.owner).then (@triggers) =>
       @noFlows = _.isEmpty @triggers
 
       _.each @triggers, (trigger, i) =>
@@ -31,7 +32,7 @@ class HomeController
 
   triggerTheTrigger: (trigger) =>
     trigger.triggering = true
-    @TriggerService.trigger(trigger.flow, trigger.id, @cookies.uuid, @cookies.token).then ()=>
+    @TriggerService.trigger(trigger.flow, trigger.id, @routeParams.uuid, @cookies.token).then ()=>
       delete trigger.triggering
 
 

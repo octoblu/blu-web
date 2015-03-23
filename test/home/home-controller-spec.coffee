@@ -18,10 +18,11 @@ describe 'HomeController', ->
   describe 'when the user is authenticated (valid uuid | token)', ->
     beforeEach ->
       @sut = @controller('HomeController', {
-        TriggerService : @triggerService,
-        DeviceService : @deviceService,
-        $cookies: {uuid: 'uuid', token: 'token'},
+        $cookies: {token: 'token'}
         $location: @location
+        $routeParams: {uuid: 'uuid'}
+        TriggerService : @triggerService
+        DeviceService : @deviceService
       })
       @rootScope.$digest()
 
@@ -77,8 +78,9 @@ describe 'HomeController', ->
   describe 'when the user has a valid uuid but does not have a token', ->
     beforeEach ->
       @sut = @controller 'HomeController',
-        $cookies: {uuid: 1, token: undefined}
+        $cookies: {token: undefined}
         $location: @location
+        $routeParams: {uuid: 1}
         DeviceService:  {}
         TriggerService: {}
 
@@ -89,8 +91,9 @@ describe 'HomeController', ->
     beforeEach ->
       @deviceService = getDevice: sinon.stub().returns @q.reject(new Error('Unauthorized'))
       @sut = @controller 'HomeController',
-        $cookies: {uuid: 'ascension', token: 'what goes up, must come DEAD'}
+        $cookies: {token: 'what goes up, must come DEAD'}
         $location: @location
+        $routeParams: {uuid: 'ascension'}
         DeviceService:  @deviceService
         TriggerService: {}
       @rootScope.$digest()
@@ -102,8 +105,9 @@ describe 'HomeController', ->
     beforeEach ->
       @deviceService = getDevice: sinon.stub().returns @q.reject(new Error('Unauthorized'))
       @sut = @controller 'HomeController',
-        $cookies: {uuid: 'sex-injury', token: 'Awwww yeeeaahhurkghf'}
+        $cookies: {token: 'Awwww yeeeaahhurkghf'}
         $location: @location
+        $routeParams: {uuid: 'sex-injury'}
         DeviceService:  @deviceService
         TriggerService: {}
       @rootScope.$digest()
