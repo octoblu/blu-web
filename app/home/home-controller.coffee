@@ -7,7 +7,6 @@ class HomeController
     @colorIndex = 0
     @randomRobotId = _.sample [1...9]
 
-    return @location.path('/') unless @cookies.uuid
     return @redirectToLogin() unless @cookies.token
 
     devicePromise = @DeviceService.getDevice(@cookies.uuid, @cookies.token)

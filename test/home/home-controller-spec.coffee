@@ -39,7 +39,7 @@ describe 'HomeController', ->
             name: 'calico'
           ,
             flow: 2
-            id: 'ssdf' 
+            id: 'ssdf'
             name: 'tabby'
           ]
         @getTriggers.resolve @triggers
@@ -65,7 +65,7 @@ describe 'HomeController', ->
     describe 'when triggerService.getTriggers rejects the promise', ->
       beforeEach ->
         @getTriggers.reject new Error 'ERROR WILL ROBINSON ERROR'
-        
+
       it 'should have an errorMsg property', ->
         @rootScope.$digest()
         expect(@sut.errorMessage).to.equal 'ERROR WILL ROBINSON ERROR'
@@ -74,20 +74,9 @@ describe 'HomeController', ->
         @rootScope.$digest()
         expect(@location.path).not.to.have.been.called
 
-  describe 'when the user does not have a valid uuid', ->
-    beforeEach ->
-      @sut = @controller('HomeController', {
-          TriggerService : @triggerService,
-          $cookies: {},
-          $location: @location
-
-        })
-    it 'should redirect the user to the register page', ->
-      expect(@location.path).to.have.been.calledWith '/'
-
   describe 'when the user has a valid uuid but does not have a token', ->
     beforeEach ->
-      @sut = @controller 'HomeController', 
+      @sut = @controller 'HomeController',
         $cookies: {uuid: 1, token: undefined}
         $location: @location
         DeviceService:  {}
@@ -99,7 +88,7 @@ describe 'HomeController', ->
   describe 'when deviceService rejects on getDevice', ->
     beforeEach ->
       @deviceService = getDevice: sinon.stub().returns @q.reject(new Error('Unauthorized'))
-      @sut = @controller 'HomeController', 
+      @sut = @controller 'HomeController',
         $cookies: {uuid: 'ascension', token: 'what goes up, must come DEAD'}
         $location: @location
         DeviceService:  @deviceService
@@ -112,7 +101,7 @@ describe 'HomeController', ->
   describe 'when deviceService rejects a different device on getDevice', ->
     beforeEach ->
       @deviceService = getDevice: sinon.stub().returns @q.reject(new Error('Unauthorized'))
-      @sut = @controller 'HomeController', 
+      @sut = @controller 'HomeController',
         $cookies: {uuid: 'sex-injury', token: 'Awwww yeeeaahhurkghf'}
         $location: @location
         DeviceService:  @deviceService
