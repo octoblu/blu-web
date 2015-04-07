@@ -1,0 +1,26 @@
+id: blu-web-green-controller
+kind: ReplicationController
+apiVersion: v1beta1
+labels:
+  name: blu-web-green
+  version: "$SHORT_COMMIT"
+desiredState:
+  replicas: 2
+  replicaSelector:
+    name: blu-web-green
+    version: "$SHORT_COMMIT"
+  podTemplate:
+    labels:
+      name: blu-web-green
+      app: blu-web-green
+      version: "$SHORT_COMMIT"
+    desiredState:
+      manifest:
+        version: v1beta1
+        id: blu-web-green
+        containers:
+          - name: blu-web-green
+            image: octoblu/blu-web:$SHORT_COMMIT
+            ports:
+              - containerPort: 9000
+
