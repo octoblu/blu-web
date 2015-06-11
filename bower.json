@@ -22,5 +22,8 @@
     "angular-mocks": "~1.3.13",
     "angular-material": "master",
     "angulartics": "~0.17.2"
+  },
+  "resolutions": {
+    "angular": "1.4.0"
   }
 }
