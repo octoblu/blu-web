@@ -5,9 +5,9 @@ node_js:
 before_script: ./node_modules/.bin/gulp
 deploy:
   provider: s3
-  access_key_id: AKIAIT4X4NDGM2WVL6VA
+  access_key_id: AKIAJH2D5IPIRHYJT5IA
   secret_access_key:
-    secure: Q5Ns7G3ibVV8HrpI1GeZbypETL/MEywN0PuSljmW+0aYCERNgKqgU0Uy8AJrCy/ymfyCzmB+MD62Urq3ZCqWyVeVYJcKpYL518IlnOtv6KI2GXJgQ2eGFJSX5jw7fKvCh9Le0nw9TP7op8EHo22n16pUZkFupfkFajeR1JBmVnY=
+    secure: "J1Yo/vN2bA1+7hmeXtjityRLiEXbBKzBjz0fDX1adNgK4RfiYS7X4V3O4SuZ1DkpS5krxrrl4OcajLQxAvRBHo42WkXHf3cdrbQJoxikU2mWTVKTLeAXdhowpxjhypqGmotBMifajdB+2ToZNmI8xbnR3G4wYSyZX+ngtPQjolw="
   bucket: blu.octoblu.com
   endpoint: blu.octoblu.com.s3-website-us-west-2.amazonaws.com
   region: us-west-2
